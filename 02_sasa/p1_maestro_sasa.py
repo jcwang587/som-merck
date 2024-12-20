@@ -3,12 +3,6 @@ import numpy as np
 
 from schrodinger.structure import StructureReader
 from schrodinger.structutils.analyze import calculate_sasa_by_atom
-from schrodinger.structutils.build import delete_hydrogens
-
-import sys
-sys.path.append("../src")
-
-from utils import renew_folder
 
 
 def calculate_sasa(conformer_path):
@@ -56,18 +50,15 @@ def calculate_sasa(conformer_path):
     lowest_energy_conformer = structures[lowest_energy_index]
 
     # Add the SASA property to the structure
-    for atom in structure.atom:
+    for atom in lowest_energy_conformer.atom:
         atom.property["r_user_sasa"] = sasa_dict[atom.index]
 
-    # Remove the hydrogen atoms from the structure
-    # delete_hydrogens(structure)
-
     # Write the structure with the SASA property
-    structure.write(conformer_path.split("-out.sdf")[0] + "_sasa.mae")
+    lowest_energy_conformer.write(conformer_path.split("-out.sdf")[0] + "_sasa.mae")
 
 
 def main():
-    sdf_conformer_energy_dir = "../data/sasa/sdf_conformer_energy"
+    sdf_conformer_energy_dir = "../data/conformer"
 
     for file in os.listdir(sdf_conformer_energy_dir):
         if file.endswith(".sdf"):
