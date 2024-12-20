@@ -1,0 +1,37 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 063_beta_arteether.mae -omae 3a4_reactivity-063_beta_arteether.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        063_beta_arteether.mae
+Output file name:                       3a4_reactivity-063_beta_arteether.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3d1070c1-beed-11ef-811c-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: beta_arteether
+ Calculated Reactivities
+  Atom    Reactivity
+     1     4.07
+     8     4.28
+    18     5.08
+    23     3.17
+     2    -1.06
+    19     2.69
+    21     1.38
+    22     2.40
+     4     1.63
+     6     5.32
+     7     5.15
+     9     0.64
+    11     7.12
+    13     5.75
+    15     7.30
+    16     7.08
+---------------------------
+
+Job completed at Fri Dec 20 11:12:43 2024
+Elapsed time: 1.10201s

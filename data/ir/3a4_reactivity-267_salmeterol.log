@@ -1,0 +1,42 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 267_salmeterol.mae -omae 3a4_reactivity-267_salmeterol.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        267_salmeterol.mae
+Output file name:                       3a4_reactivity-267_salmeterol.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4f1a66b8-beed-11ef-8703-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: salmeterol
+ Calculated Reactivities
+  Atom    Reactivity
+     3     2.83
+     4     3.57
+     6     2.12
+    26     0.53
+    27     0.53
+    28     2.41
+    29     2.41
+    30     0.14
+     8    -1.78
+    15     3.46
+    16     3.25
+    17     3.02
+    18     2.48
+    19    -0.61
+    21    -0.63
+    22     2.31
+    23     2.77
+    24    -0.02
+    10     2.25
+    11    -4.60
+    14    -4.15
+---------------------------
+
+Job completed at Fri Dec 20 11:13:13 2024
+Elapsed time: 1.10113s

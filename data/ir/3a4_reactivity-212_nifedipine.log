@@ -1,0 +1,30 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 212_nifedipine.mae -omae 3a4_reactivity-212_nifedipine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        212_nifedipine.mae
+Output file name:                       3a4_reactivity-212_nifedipine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4bd586b7-beed-11ef-aced-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: nifedipine
+ Calculated Reactivities
+  Atom    Reactivity
+     4    13.32
+    21    -4.45
+    24    -4.45
+     7    -5.09
+    13    -4.93
+    14    -4.93
+     3     4.07
+     5     4.58
+    10    -4.78
+---------------------------
+
+Job completed at Fri Dec 20 11:13:07 2024
+Elapsed time: 1.09946s

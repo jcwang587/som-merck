@@ -1,0 +1,36 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 287_terbinafine.mae -omae 3a4_reactivity-287_terbinafine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        287_terbinafine.mae
+Output file name:                       3a4_reactivity-287_terbinafine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  52abdd79-beed-11ef-8dff-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: terbinafine
+ Calculated Reactivities
+  Atom    Reactivity
+     1     3.15
+     2     1.24
+     5     3.18
+     6     0.90
+     7    -4.48
+     8     3.18
+     9    -1.43
+    20     3.45
+    21     3.45
+    22     3.45
+    11    -5.54
+    15     1.91
+    16     0.64
+    13    -4.42
+    14    -5.35
+---------------------------
+
+Job completed at Fri Dec 20 11:13:19 2024
+Elapsed time: 1.10402s

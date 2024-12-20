@@ -1,0 +1,34 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 085_citalopram.mae -omae 3a4_reactivity-085_citalopram.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        085_citalopram.mae
+Output file name:                       3a4_reactivity-085_citalopram.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3e5569b9-beed-11ef-a5b7-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: citalopram
+ Calculated Reactivities
+  Atom    Reactivity
+     2     7.24
+     3     6.51
+     4     7.99
+    14     5.30
+    15     5.30
+    16     4.96
+    17     4.96
+     9    -1.79
+    12     2.19
+    19     2.87
+    22    -4.56
+    23    -4.56
+    20    -4.32
+---------------------------
+
+Job completed at Fri Dec 20 11:12:45 2024
+Elapsed time: 1.09076s

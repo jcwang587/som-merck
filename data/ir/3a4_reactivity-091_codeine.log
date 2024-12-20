@@ -1,0 +1,34 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 091_codeine.mae -omae 3a4_reactivity-091_codeine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        091_codeine.mae
+Output file name:                       3a4_reactivity-091_codeine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3fa6b36d-beed-11ef-b81a-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: codeine
+ Calculated Reactivities
+  Atom    Reactivity
+     3    -3.49
+     4    -3.22
+    22    -3.37
+    11    -1.14
+     8     0.91
+    12     0.19
+    13     3.88
+    14     4.29
+    10     4.89
+    19     7.05
+    21    -4.18
+     9    -2.88
+    20    -2.72
+---------------------------
+
+Job completed at Fri Dec 20 11:12:47 2024
+Elapsed time: 1.0877s

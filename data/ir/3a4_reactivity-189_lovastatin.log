@@ -1,0 +1,42 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 189_lovastatin.mae -omae 3a4_reactivity-189_lovastatin.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        189_lovastatin.mae
+Output file name:                       3a4_reactivity-189_lovastatin.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4a909c4d-beed-11ef-b137-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: lovastatin
+ Calculated Reactivities
+  Atom    Reactivity
+    11     4.97
+    13     5.05
+    28     5.06
+    29     5.11
+    14     2.92
+    15     2.69
+    27     3.10
+    25     2.55
+     2    -4.76
+     6     1.35
+     9    -4.23
+     3     4.88
+     7     4.66
+     8     4.86
+     1     6.89
+     4     4.80
+    10     7.06
+    16     4.34
+    17     6.17
+    20     6.22
+    22     5.73
+---------------------------
+
+Job completed at Fri Dec 20 11:13:05 2024
+Elapsed time: 1.08278s

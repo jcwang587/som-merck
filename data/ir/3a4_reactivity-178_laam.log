@@ -1,0 +1,40 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 178_laam.mae -omae 3a4_reactivity-178_laam.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        178_laam.mae
+Output file name:                       3a4_reactivity-178_laam.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4898de20-beed-11ef-8206-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: laam
+ Calculated Reactivities
+  Atom    Reactivity
+     9    -0.70
+    10    -0.70
+    11    -0.70
+    12    -0.70
+    16     1.47
+    17     1.47
+    18     1.47
+    19     1.47
+    22    -1.25
+    23    -1.25
+    14     5.18
+    25     4.74
+    26     4.04
+     2     2.85
+     8     2.52
+     3     0.33
+    20    -4.52
+    21    -4.52
+     6    -4.33
+---------------------------
+
+Job completed at Fri Dec 20 11:13:02 2024
+Elapsed time: 1.09062s

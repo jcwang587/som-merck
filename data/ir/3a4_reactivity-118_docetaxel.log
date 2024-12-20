@@ -1,0 +1,50 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 118_docetaxel.mae -omae 3a4_reactivity-118_docetaxel.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        118_docetaxel.mae
+Output file name:                       3a4_reactivity-118_docetaxel.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  437b9cea-beed-11ef-ba21-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: docetaxel
+ Calculated Reactivities
+  Atom    Reactivity
+    34     4.77
+    35     4.77
+    38     4.59
+    39     4.59
+    42     4.94
+    47     0.42
+    48     0.42
+    50     3.14
+    51     3.14
+    54     0.31
+    15     4.91
+    16     3.96
+    26    -6.55
+    27    -6.55
+    56     3.60
+    57     3.60
+    58     3.60
+     4    -1.64
+     3    -0.48
+     6    -0.48
+    40     1.62
+    43     2.25
+    36     2.60
+    23     0.90
+    28    -1.10
+     2     5.03
+     9     5.88
+    13     5.99
+    19     6.43
+---------------------------
+
+Job completed at Fri Dec 20 11:12:53 2024
+Elapsed time: 1.10618s

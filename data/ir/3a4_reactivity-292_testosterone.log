@@ -1,0 +1,36 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 292_testosterone.mae -omae 3a4_reactivity-292_testosterone.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        292_testosterone.mae
+Output file name:                       3a4_reactivity-292_testosterone.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  540d6ea3-beed-11ef-8769-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: testosterone
+ Calculated Reactivities
+  Atom    Reactivity
+    18     5.43
+    19     5.60
+     7    -0.65
+     3     5.49
+     1     5.42
+     6     7.30
+     8     8.28
+     9     8.39
+    10     8.19
+    11     8.25
+    13     8.26
+    14     8.38
+    15     8.29
+    16     7.38
+    17     7.27
+---------------------------
+
+Job completed at Fri Dec 20 11:13:21 2024
+Elapsed time: 1.14366s

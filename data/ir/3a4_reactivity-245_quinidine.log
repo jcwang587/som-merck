@@ -1,0 +1,38 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 245_quinidine.mae -omae 3a4_reactivity-245_quinidine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        245_quinidine.mae
+Output file name:                       3a4_reactivity-245_quinidine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4e7368c3-beed-11ef-9db1-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: quinidine
+ Calculated Reactivities
+  Atom    Reactivity
+     2     1.48
+     3     1.88
+     6     1.72
+     8     7.28
+     9     3.87
+    23    -3.37
+    11     7.13
+    15    -4.09
+    18     2.02
+    19     5.11
+    16     7.45
+    17     7.78
+    20     7.86
+    12    -3.09
+    14    -2.69
+    21    -2.63
+     7   Conj_Base -1.90
+---------------------------
+
+Job completed at Fri Dec 20 11:13:12 2024
+Elapsed time: 1.13158s

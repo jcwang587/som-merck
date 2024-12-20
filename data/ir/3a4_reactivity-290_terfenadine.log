@@ -1,0 +1,47 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 290_terfenadine.mae -omae 3a4_reactivity-290_terfenadine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        290_terfenadine.mae
+Output file name:                       3a4_reactivity-290_terfenadine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  535d9100-beed-11ef-8934-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: terfenadine
+ Calculated Reactivities
+  Atom    Reactivity
+     6     1.48
+     7     2.97
+     8     0.94
+     9     2.97
+    10     1.48
+    11     1.48
+    12     2.97
+    13     0.94
+    14     2.97
+    15     1.48
+    26     1.63
+    27     2.82
+    29     2.82
+    30     1.63
+    32    -2.53
+    33    -2.53
+    34    -2.53
+    22     3.33
+    23     2.21
+    24     0.71
+     5     6.52
+    16     7.44
+    17     7.44
+    18    -2.98
+    19    -2.98
+    21    -4.22
+---------------------------
+
+Job completed at Fri Dec 20 11:13:20 2024
+Elapsed time: 1.12873s

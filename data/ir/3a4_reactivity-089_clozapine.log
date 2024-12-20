@@ -1,0 +1,34 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 089_clozapine.mae -omae 3a4_reactivity-089_clozapine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        089_clozapine.mae
+Output file name:                       3a4_reactivity-089_clozapine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3f06d766-beed-11ef-a13e-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: clozapine
+ Calculated Reactivities
+  Atom    Reactivity
+     4     3.19
+    10    -1.04
+    11    -0.75
+    12    -0.28
+    17     5.32
+    21     5.32
+    22    -4.27
+    18    -3.30
+    20    -3.30
+     2     8.06
+     5     6.48
+     9     6.05
+     7    -2.60
+---------------------------
+
+Job completed at Fri Dec 20 11:12:46 2024
+Elapsed time: 1.11151s

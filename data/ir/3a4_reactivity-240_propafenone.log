@@ -1,0 +1,38 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 240_propafenone.mae -omae 3a4_reactivity-240_propafenone.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        240_propafenone.mae
+Output file name:                       3a4_reactivity-240_propafenone.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4db0384c-beed-11ef-99d6-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: propafenone
+ Calculated Reactivities
+  Atom    Reactivity
+     3     0.82
+     4     2.33
+     5     0.65
+     6     2.33
+     7     0.82
+    11     4.81
+    12     1.66
+    13     4.95
+    14     2.51
+    25     5.10
+     2    -0.99
+     8     0.28
+    18    -1.76
+    24     3.39
+    19     1.79
+    20    -4.61
+    23    -4.20
+---------------------------
+
+Job completed at Fri Dec 20 11:13:10 2024
+Elapsed time: 1.0906s

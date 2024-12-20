@@ -1,0 +1,51 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 167_indinavir.mae -omae 3a4_reactivity-167_indinavir.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        167_indinavir.mae
+Output file name:                       3a4_reactivity-167_indinavir.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  47f3a76c-beed-11ef-9e0d-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: indinavir
+ Calculated Reactivities
+  Atom    Reactivity
+     4    -0.16
+     8     0.40
+     9    -0.29
+    12    -0.66
+    19     0.77
+    20     0.77
+    23     2.81
+    24     2.81
+    26     0.12
+    41     2.11
+    42     2.11
+    43     5.24
+    45     1.14
+    38    -1.91
+    39    -1.91
+    40    -1.91
+     7    -2.99
+    15     0.16
+    16     2.69
+     2     1.42
+     5     2.77
+    13     3.04
+    18     2.94
+    35    -5.33
+    27    -2.90
+    28    -2.68
+    29    -2.67
+    31    -2.71
+    21    -4.43
+    44   Conj_Base  2.14
+---------------------------
+
+Job completed at Fri Dec 20 11:13:01 2024
+Elapsed time: 1.11062s

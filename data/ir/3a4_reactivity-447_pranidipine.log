@@ -1,0 +1,38 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 447_pranidipine.mae -omae 3a4_reactivity-447_pranidipine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        447_pranidipine.mae
+Output file name:                       3a4_reactivity-447_pranidipine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  65eeeb70-beed-11ef-bdaa-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: pranidipine
+ Calculated Reactivities
+  Atom    Reactivity
+     6    10.34
+    29     3.00
+    30     3.00
+    31     3.61
+    32     3.61
+    33     2.31
+    23    -4.16
+     1    -5.14
+    14    -4.66
+    17    -4.64
+    22    -3.63
+    26     2.29
+    27     2.40
+    12     6.89
+     5    14.12
+    20    13.45
+    13    -4.83
+---------------------------
+
+Job completed at Fri Dec 20 11:13:51 2024
+Elapsed time: 1.09287s

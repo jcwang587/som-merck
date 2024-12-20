@@ -1,0 +1,37 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 061_azelastine.mae -omae 3a4_reactivity-061_azelastine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        061_azelastine.mae
+Output file name:                       3a4_reactivity-061_azelastine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3c707866-beed-11ef-8819-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: azelastine
+ Calculated Reactivities
+  Atom    Reactivity
+     3     4.67
+     4     3.19
+     5     2.73
+     6     4.68
+    14     2.28
+    15     2.28
+    16     3.81
+    18     3.81
+    12     2.78
+    21     3.39
+    25     3.44
+    26     3.31
+    27    -4.20
+    20     3.52
+    22    -2.70
+    24    -2.70
+---------------------------
+
+Job completed at Fri Dec 20 11:12:42 2024
+Elapsed time: 1.08698s

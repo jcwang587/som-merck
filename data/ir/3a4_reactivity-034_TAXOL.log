@@ -1,0 +1,53 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 034_TAXOL.mae -omae 3a4_reactivity-034_TAXOL.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        034_TAXOL.mae
+Output file name:                       3a4_reactivity-034_TAXOL.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  39de9c93-beed-11ef-95b1-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: TAXOL
+ Calculated Reactivities
+  Atom    Reactivity
+    34     4.77
+    35     4.77
+    39     4.59
+    40     4.59
+    45     4.95
+    50     0.55
+    51     0.55
+    53     3.01
+    54     3.01
+    57     0.63
+    58     5.21
+    59     5.21
+    60     5.29
+    61     5.29
+    62     4.05
+    12     4.65
+    23     3.95
+    26    -6.55
+    27    -6.55
+    41     3.97
+     6    -1.70
+     3    -0.59
+     5    -0.57
+    43     1.77
+    46     2.69
+    37     2.60
+    20    -1.78
+    28    -1.08
+     1     4.77
+    11     5.73
+    14     5.75
+    17     6.41
+---------------------------
+
+Job completed at Fri Dec 20 11:12:37 2024
+Elapsed time: 1.12171s

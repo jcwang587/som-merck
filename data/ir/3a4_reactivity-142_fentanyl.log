@@ -1,0 +1,40 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 142_fentanyl.mae -omae 3a4_reactivity-142_fentanyl.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        142_fentanyl.mae
+Output file name:                       3a4_reactivity-142_fentanyl.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  45fabbdf-beed-11ef-9971-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: fentanyl
+ Calculated Reactivities
+  Atom    Reactivity
+     3    -0.27
+     4     2.61
+     5    -0.68
+     6     2.61
+     7    -0.27
+    19     3.77
+    21     3.77
+    25     5.13
+     2     0.24
+    24     2.71
+    11     7.36
+    14     7.36
+    20    -1.97
+    12    -0.06
+    10    -2.99
+    15    -2.99
+     8    -4.24
+    18     6.07
+    22     6.07
+---------------------------
+
+Job completed at Fri Dec 20 11:12:58 2024
+Elapsed time: 1.10687s

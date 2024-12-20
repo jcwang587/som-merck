@@ -1,0 +1,41 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 280_tamoxifen.mae -omae 3a4_reactivity-280_tamoxifen.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        280_tamoxifen.mae
+Output file name:                       3a4_reactivity-280_tamoxifen.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  5124a831-beed-11ef-aa48-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: tamoxifen
+ Calculated Reactivities
+  Atom    Reactivity
+     7     0.55
+     8     0.55
+     9     0.30
+    10     0.30
+    11     0.17
+    12     0.17
+    14    -0.86
+    15    -0.86
+    16     1.49
+    17     1.49
+    18     1.65
+    19     1.65
+    21     0.86
+    22     0.42
+    13     4.67
+    24    -1.10
+     6     0.75
+    27    -4.62
+    28    -4.62
+    25    -4.71
+---------------------------
+
+Job completed at Fri Dec 20 11:13:16 2024
+Elapsed time: 1.12918s

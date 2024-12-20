@@ -1,0 +1,50 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 116_diltiazem.mae -omae 3a4_reactivity-116_diltiazem.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        116_diltiazem.mae
+Output file name:                       3a4_reactivity-116_diltiazem.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  42d9be3f-beed-11ef-b6b7-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: diltiazem
+ Calculated Reactivities
+  Atom    Reactivity
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+WARNING Missing sigma star value for Methane thiol. Using a value of 0.0.
+     2     3.74
+     4     3.55
+    23     4.34
+    24     3.08
+    26     3.08
+    27     4.34
+    20     3.98
+    29    -3.37
+     9    -0.30
+    10    -0.77
+     3    -0.64
+    15    -4.58
+    16    -4.58
+    11   Conj_Base -4.13
+    12    -0.77
+    13    -4.42
+     5     7.38
+---------------------------
+
+Job completed at Fri Dec 20 11:12:52 2024
+Elapsed time: 1.09466s

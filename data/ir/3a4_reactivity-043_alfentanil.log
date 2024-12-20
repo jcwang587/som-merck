@@ -1,0 +1,38 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 043_alfentanil.mae -omae 3a4_reactivity-043_alfentanil.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        043_alfentanil.mae
+Output file name:                       3a4_reactivity-043_alfentanil.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3b2d20fe-beed-11ef-95db-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: alfentanil
+ Calculated Reactivities
+  Atom    Reactivity
+    26     3.63
+    28     3.63
+     9     4.93
+    20    -2.89
+    24     5.09
+    17    -0.67
+    23     2.62
+    13     7.02
+    15     7.02
+    27    -2.01
+     6     3.51
+     8     3.38
+    12    -3.00
+    16    -3.00
+    10    -4.25
+    25     5.84
+    29     5.84
+---------------------------
+
+Job completed at Fri Dec 20 11:12:40 2024
+Elapsed time: 1.08709s

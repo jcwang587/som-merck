@@ -1,0 +1,31 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 200_midazolam.mae -omae 3a4_reactivity-200_midazolam.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        200_midazolam.mae
+Output file name:                       3a4_reactivity-200_midazolam.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4b3558e1-beed-11ef-a953-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: midazolam
+ Calculated Reactivities
+  Atom    Reactivity
+     1     5.46
+     2     5.53
+     5     5.32
+    13     1.37
+    18     7.04
+    20     2.83
+    21     4.51
+    22     7.18
+    12    -1.04
+    15    -3.37
+---------------------------
+
+Job completed at Fri Dec 20 11:13:06 2024
+Elapsed time: 1.0834s

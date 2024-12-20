@@ -1,0 +1,51 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 268_saquinavir.mae -omae 3a4_reactivity-268_saquinavir.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        268_saquinavir.mae
+Output file name:                       3a4_reactivity-268_saquinavir.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4fcd63df-beed-11ef-8c98-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: saquinavir
+ Calculated Reactivities
+  Atom    Reactivity
+    26     0.54
+    27     0.54
+    30     2.81
+    31     2.81
+    34     0.20
+    42     8.00
+    44    10.87
+    46     2.70
+    47     2.83
+    48     2.72
+    49    -1.86
+    21    -1.90
+    22    -1.90
+    23    -1.90
+    18     0.65
+    33     2.87
+     8     3.19
+    13     3.10
+    28     2.90
+     5     8.22
+     7     8.14
+     9     7.96
+    12     8.02
+    15     8.13
+    17     8.02
+    20     7.97
+     2    -2.80
+     3    -2.53
+     4    -4.36
+    41   Conj_Base  4.78
+---------------------------
+
+Job completed at Fri Dec 20 11:13:14 2024
+Elapsed time: 1.11677s

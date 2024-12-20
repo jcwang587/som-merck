@@ -1,0 +1,41 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 073_buprenorphine.mae -omae 3a4_reactivity-073_buprenorphine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        073_buprenorphine.mae
+Output file name:                       3a4_reactivity-073_buprenorphine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3db480ea-beed-11ef-b2cd-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: buprenorphine
+ Calculated Reactivities
+  Atom    Reactivity
+     1    -5.75
+     6    -4.78
+    19     5.48
+    21    -2.01
+    22    -2.01
+    23    -2.01
+    26    -2.87
+    33     3.15
+    34     3.15
+    13    -0.04
+    32     3.75
+    10    -5.10
+    15     7.92
+    16     7.19
+    24     7.09
+    27     7.76
+    28     7.66
+    11    -2.63
+    30    -2.60
+    31    -4.15
+---------------------------
+
+Job completed at Fri Dec 20 11:12:44 2024
+Elapsed time: 1.11935s

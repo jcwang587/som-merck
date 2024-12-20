@@ -1,0 +1,36 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 187_loratadine.mae -omae 3a4_reactivity-187_loratadine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        187_loratadine.mae
+Output file name:                       3a4_reactivity-187_loratadine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  49d81f89-beed-11ef-8fe6-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: loratadine
+ Calculated Reactivities
+  Atom    Reactivity
+     1     4.20
+     2     1.12
+     3     3.78
+    11     2.14
+    12     2.20
+    14     2.80
+    25     4.11
+     7    -1.05
+     8    -0.82
+    24    -0.95
+    17     1.26
+    21     1.26
+    18     0.57
+    20     0.57
+     4   Conj_Base -1.56
+---------------------------
+
+Job completed at Fri Dec 20 11:13:04 2024
+Elapsed time: 1.10581s

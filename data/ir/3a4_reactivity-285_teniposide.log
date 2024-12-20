@@ -1,0 +1,44 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 285_teniposide.mae -omae 3a4_reactivity-285_teniposide.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        285_teniposide.mae
+Output file name:                       3a4_reactivity-285_teniposide.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  51f1e562-beed-11ef-bbdc-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: teniposide
+ Calculated Reactivities
+  Atom    Reactivity
+    12     0.24
+    13    -3.48
+    14    -3.48
+    16     0.88
+    43     4.48
+    45     6.02
+    46     1.06
+    30    -3.67
+    32    -3.67
+    29    -5.00
+    41    -6.26
+     5     5.71
+     7    -1.67
+    10    -0.24
+    20     0.61
+    27     3.72
+    33     2.16
+    35     4.09
+    36     2.03
+    37    -2.31
+    44   Conj_Base  4.65
+     3     1.60
+     6     1.56
+---------------------------
+
+Job completed at Fri Dec 20 11:13:18 2024
+Elapsed time: 1.12684s

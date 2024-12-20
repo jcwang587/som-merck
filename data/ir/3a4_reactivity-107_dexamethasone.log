@@ -1,0 +1,36 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 107_dexamethasone.mae -omae 3a4_reactivity-107_dexamethasone.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        107_dexamethasone.mae
+Output file name:                       3a4_reactivity-107_dexamethasone.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  40e38ca6-beed-11ef-a4c8-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: dexamethasone
+ Calculated Reactivities
+  Atom    Reactivity
+     1     5.44
+    16     5.35
+    22     4.30
+    14    -1.03
+    20    -1.29
+    24     2.79
+    25     2.26
+    26     1.96
+     3     7.84
+     5     7.27
+     6     7.65
+     7     8.11
+    10     7.24
+    11     7.00
+    13     7.33
+---------------------------
+
+Job completed at Fri Dec 20 11:12:49 2024
+Elapsed time: 1.09473s

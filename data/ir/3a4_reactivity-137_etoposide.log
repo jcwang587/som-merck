@@ -1,0 +1,41 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 137_etoposide.mae -omae 3a4_reactivity-137_etoposide.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        137_etoposide.mae
+Output file name:                       3a4_reactivity-137_etoposide.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  455fab13-beed-11ef-beca-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: etoposide
+ Calculated Reactivities
+  Atom    Reactivity
+     6     0.24
+     9    -3.48
+    10    -3.48
+    12     0.88
+    29    -3.67
+    30    -3.67
+    42     3.25
+    27    -5.00
+     1     5.71
+    11    -0.24
+    14    -1.67
+    25     0.61
+    32     3.74
+    33     2.27
+    34     4.15
+    36     2.19
+    37    -2.14
+    41     1.70
+     3     1.60
+     7     1.56
+---------------------------
+
+Job completed at Fri Dec 20 11:12:56 2024
+Elapsed time: 1.10864s

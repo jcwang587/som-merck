@@ -1,0 +1,33 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 039_adinazolam.mae -omae 3a4_reactivity-039_adinazolam.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        039_adinazolam.mae
+Output file name:                       3a4_reactivity-039_adinazolam.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  3a7cce21-beed-11ef-b5b5-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: adinazolam
+ Calculated Reactivities
+  Atom    Reactivity
+     1     5.46
+     2     5.53
+     5     5.32
+    18     3.02
+    19     3.02
+    20     2.53
+    21     2.53
+    22     3.46
+    15    -5.54
+    12    -5.44
+    23    -4.69
+    24    -4.69
+---------------------------
+
+Job completed at Fri Dec 20 11:12:38 2024
+Elapsed time: 1.07926s

@@ -1,0 +1,32 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 314_zaleplon.mae -omae 3a4_reactivity-314_zaleplon.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        314_zaleplon.mae
+Output file name:                       3a4_reactivity-314_zaleplon.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  5568e5fe-beed-11ef-9c2b-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: zaleplon
+ Calculated Reactivities
+  Atom    Reactivity
+     2     2.67
+     8     7.38
+     9     9.70
+    14     9.21
+    20     4.47
+    23     4.81
+     1    -2.54
+    22    -1.26
+     3     6.34
+     5     5.38
+    10   Conj_Base  6.41
+---------------------------
+
+Job completed at Fri Dec 20 11:13:23 2024
+Elapsed time: 1.09186s

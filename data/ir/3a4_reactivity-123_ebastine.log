@@ -1,0 +1,46 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 123_ebastine.mae -omae 3a4_reactivity-123_ebastine.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        123_ebastine.mae
+Output file name:                       3a4_reactivity-123_ebastine.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  441fe6c5-beed-11ef-8c50-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: ebastine
+ Calculated Reactivities
+  Atom    Reactivity
+     1     3.12
+     2     2.41
+     3     2.22
+     4     3.12
+     5     2.41
+     9     2.41
+    10     3.12
+    11     2.22
+    12     3.12
+    13     2.41
+    26     2.60
+    27     3.29
+    29     3.29
+    30     2.60
+    32    -1.57
+    33    -1.57
+    34    -1.57
+    22     0.54
+     7    -0.01
+    15     4.77
+    16     6.78
+    20     6.78
+    17    -3.17
+    19    -3.17
+    21    -4.59
+---------------------------
+
+Job completed at Fri Dec 20 11:12:54 2024
+Elapsed time: 1.10943s
