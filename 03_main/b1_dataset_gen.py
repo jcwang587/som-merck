@@ -308,8 +308,6 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
             atomic_index, pd.NA
         )
 
-
-
         dataset = dataset.append(
             {
                 "zaretzki_index": zaretzki_index,
