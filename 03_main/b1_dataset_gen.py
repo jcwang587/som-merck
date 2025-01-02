@@ -34,7 +34,7 @@ epik_cyp_mae_files.sort()
 ir_dict = {}
 for mae_file in epik_cyp_mae_files:
     structure = StructureReader.read(os.path.join(epik_cyp_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("-")[-1].split("_")[0]
     ir_dict[mae_file_index] = {}
     for atom in structure.atom:
         if "r_cyp_CYP_reactivity" in atom.property:
@@ -47,7 +47,7 @@ for mae_file in epik_cyp_mae_files:
 relative_ir_dict = {}
 for mae_file in epik_cyp_mae_files:
     structure = StructureReader.read(os.path.join(epik_cyp_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("-")[-1].split("_")[0]
     temp_ir = []
     for atom in structure.atom:
         if "r_cyp_CYP_reactivity" in atom.property:
@@ -78,7 +78,7 @@ qmox_mae_files.sort()
 bde_dict = {}
 for mae_file in qmox_mae_files:
     structure = StructureReader.read(os.path.join(qmox_mae_dir, mae_file))
-    mae_file_index = mae_file.split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     bde_dict[mae_file_index] = {}
     for atom in structure.atom:
         if "r_user_CH-BDE" in atom.property:
@@ -90,7 +90,7 @@ for mae_file in qmox_mae_files:
 relative_bde_dict = {}
 for mae_file in qmox_mae_files:
     structure = StructureReader.read(os.path.join(qmox_mae_dir, mae_file))
-    mae_file_index = mae_file.split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     temp_bde = []
     for atom in structure.atom:
         if "r_user_CH-BDE" in atom.property:
@@ -121,7 +121,7 @@ sasa_hydrogen_maestro_files.sort()
 sasa_hydrogen_maestro_dict = {}
 for mae_file in sasa_hydrogen_maestro_files:
     structure = StructureReader.read(os.path.join(sasa_hydrogen_maestro_dir, mae_file))
-    mae_file_index = mae_file.split("-")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     sasa_hydrogen_maestro_dict[mae_file_index] = {}
 
     for atom in structure.atom:
