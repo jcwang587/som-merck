@@ -160,12 +160,12 @@ for mae_file_index in sasa_hydrogen_maestro_dict.keys():
 atomic_number_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     atomic_number_dict[mae_file_index] = {}
     for atom in structure.atom:
         atomic_number_dict[mae_file_index][atom.index] = atom.property.get(
             "i_m_atomic_number"
-        )
+        ) 
 
 
 # Property 2: Hydrogen Neighbor
@@ -173,7 +173,7 @@ for mae_file in all_c_mae_files:
 hydrogen_neighbor_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     rdkit_mol = adapter.to_rdkit(structure)
     hydrogen_neighbor_dict[mae_file_index] = {}
     for rdkit_atom in rdkit_mol.GetAtoms():
@@ -187,7 +187,7 @@ for mae_file in all_c_mae_files:
 is_aromatic_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     rdkit_mol = adapter.to_rdkit(structure)
     is_aromatic_dict[mae_file_index] = {}
     for rdkit_atom in rdkit_mol.GetAtoms():
@@ -203,7 +203,7 @@ heavy_atoms_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
     structure.deleteAtoms([atom for atom in structure.atom if atom.element == "H"])
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     heavy_atoms_dict[mae_file_index] = len(structure.atom)
 
 
@@ -212,7 +212,7 @@ for mae_file in all_c_mae_files:
 double_bonded_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
-    mae_file_index = mae_file.split("-")[-1].split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     rdkit_mol = adapter.to_rdkit(structure)
     double_bonded_dict[mae_file_index] = {}
     for rdkit_atom in rdkit_mol.GetAtoms():
@@ -233,7 +233,7 @@ som_dict = {}
 som_level_dict = {}
 for mae_file in all_c_mae_files:
     structure = StructureReader.read(os.path.join(all_c_mae_dir, mae_file))
-    mae_file_index = mae_file.split(".")[0].split("_")[1]
+    mae_file_index = mae_file.split("_")[0]
     molecule_title_dict[mae_file_index] = structure.property.get("s_m_title", "N/A")
     primary_som_dict[mae_file_index] = {}
     secondary_som_dict[mae_file_index] = {}
@@ -341,7 +341,7 @@ dataset = dataset[dataset["hydrogen_neighbor"] > 0]
 dataset = dataset[dataset["double_bonded"] == 0]
 
 # Export the dataset to csv
-dataset.to_csv("../data/dataset_merck_all.csv", index=False)
+dataset.to_csv("../data/dataset/dataset_merck_all.csv", index=False)
 
 # Print the ratio of SOM and non-SOM
 primary_som_count = dataset["primary_som"].sum()
