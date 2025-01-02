@@ -112,7 +112,7 @@ for mae_file in qmox_mae_files:
                 ) / (max_bde - min_bde)
 
 
-# Feature 8: SASA Hydrogen Maestro
+# Feature 5: SASA Hydrogen Maestro
 # SASA of average hydrogen atoms calculated by maestro function
 sasa_hydrogen_maestro_dir = "../data/sasa"
 sasa_hydrogen_maestro_files = [f for f in os.listdir(sasa_hydrogen_maestro_dir) if f.endswith(".mae")]
@@ -121,7 +121,7 @@ sasa_hydrogen_maestro_files.sort()
 sasa_hydrogen_maestro_dict = {}
 for mae_file in sasa_hydrogen_maestro_files:
     structure = StructureReader.read(os.path.join(sasa_hydrogen_maestro_dir, mae_file))
-    mae_file_index = mae_file.split("_")[0]
+    mae_file_index = mae_file.split("_")[1]
     sasa_hydrogen_maestro_dict[mae_file_index] = {}
 
     for atom in structure.atom:
@@ -142,7 +142,7 @@ for mae_file in sasa_hydrogen_maestro_files:
             sasa_hydrogen_maestro_dict[mae_file_index][atom.index] = hydrogen_sasa
 
 
-# Feature 9: Relative SASA Hydrogen Maestro
+# Feature 6: Relative SASA Hydrogen Maestro
 # relative SASA of hydrogen atoms within each molecule
 relative_sasa_hydrogen_maestro_dict = {}
 for mae_file_index in sasa_hydrogen_maestro_dict.keys():
