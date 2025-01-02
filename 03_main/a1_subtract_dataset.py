@@ -15,7 +15,7 @@ print(merck_files)
 raw_data = raw_data[raw_data["molecule_title"].isin(merck_files)]
 
 # save the result to a new csv file
-raw_data.to_csv("../data/dataset/dataset_merck.csv", index=False)
+raw_data.to_csv("../data/dataset/dataset_merck_sub.csv", index=False)
 
 # get the unique values in the molecule_title column
 unique_molecules = raw_data["molecule_title"].unique()

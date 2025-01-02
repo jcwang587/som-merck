@@ -341,7 +341,7 @@ dataset = dataset[dataset["hydrogen_neighbor"] > 0]
 dataset = dataset[dataset["double_bonded"] == 0]
 
 # Export the dataset to csv
-dataset.to_csv("../data/dataset/dataset_all_sites.csv", index=False)
+dataset.to_csv("../data/dataset_merck_all.csv", index=False)
 
 # Print the ratio of SOM and non-SOM
 primary_som_count = dataset["primary_som"].sum()
