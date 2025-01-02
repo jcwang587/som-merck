@@ -7,7 +7,7 @@ from utils import renew_folder
 
 
 # Load the dataset
-dataset = pd.read_csv("../../data/dataset/dataset_all_sites.csv")
+dataset = pd.read_csv("../data/dataset/dataset_merck_all.csv")
 
 dataset = dataset[dataset["bde"].notna()]
 
@@ -91,161 +91,10 @@ ax.set_ylabel("Count")
 # Add a vertical dash line at x=94
 ax.axvline(x=94, color="black", linestyle="--", linewidth=2)
 ax.set_xlim(62, 110)
-ax.set_ylim(0, 400)
+ax.set_ylim(0, 100)
 ax.legend(frameon=False, loc="upper left")
 
 plt.tight_layout()
 plt.savefig("./bde_distribution_som.png")
 plt.close()
 
-# Print the zaretzki index of the samples within the first label class
-renew_folder("../../data/bins/bde_som/")
-
-# show all when printing
-pd.set_option("display.max_rows", None)
-print(
-    primary_som_df[primary_som_df["bde"].between(bins[8], bins[9])][
-        ["zaretzki_index", "atomic_index", "bde"]
-    ]
-)
-print(
-    primary_som_df[primary_som_df["bde"].between(bins[8], bins[9])][
-        "zaretzki_index"
-    ].nunique()
-)
-
-# generate the dataframe for the high bde
-for i in range(len(bins) - 1):
-    primary_som_df_export = pd.DataFrame()
-    primary_som_df_export = pd.concat(
-        [
-            primary_som_df_export,
-            primary_som_df[primary_som_df["bde"].between(bins[i], bins[i + 1])][
-                [
-                    "zaretzki_index",
-                    "atomic_index",
-                    "zaretzki_atomic_index",
-                    "bde",
-                    "som_level",
-                ]
-            ],
-        ],
-        ignore_index=True,
-    )
-    primary_som_df_export.to_csv(
-        f"../../data/bins/bde_som/primary_som_bde_{bins[i]}_{bins[i+1]}.csv",
-        index=False,
-    )
-
-for i in range(len(bins) - 1):
-    secondary_som_df_export = pd.DataFrame()
-    secondary_som_df_export = pd.concat(
-        [
-            secondary_som_df_export,
-            secondary_som_df[secondary_som_df["bde"].between(bins[i], bins[i + 1])][
-                [
-                    "zaretzki_index",
-                    "atomic_index",
-                    "zaretzki_atomic_index",
-                    "bde",
-                    "som_level",
-                ]
-            ],
-        ],
-        ignore_index=True,
-    )
-    secondary_som_df_export.to_csv(
-        f"../../data/bins/bde_som/secondary_som_bde_{bins[i]}_{bins[i+1]}.csv",
-        index=False,
-    )
-
-for i in range(len(bins) - 1):
-    tertiary_som_df_export = pd.DataFrame()
-    tertiary_som_df_export = pd.concat(
-        [
-            tertiary_som_df_export,
-            tertiary_som_df[tertiary_som_df["bde"].between(bins[i], bins[i + 1])][
-                [
-                    "zaretzki_index",
-                    "atomic_index",
-                    "zaretzki_atomic_index",
-                    "bde",
-                    "som_level",
-                ]
-            ],
-        ],
-        ignore_index=True,
-    )
-    tertiary_som_df_export.to_csv(
-        f"../../data/bins/bde_som/tertiary_som_bde_{bins[i]}_{bins[i+1]}.csv",
-        index=False,
-    )
-
-# Initialize the dataframe first column is the zaretzki index and the second column is the atomic index
-df_low_bde_som = pd.DataFrame(
-    columns=[
-        "zaretzki_index",
-        "atomic_index",
-        "zaretzki_atomic_index",
-        "bde",
-        "som_level",
-    ]
-)
-df_low_bde_non_som = pd.DataFrame(
-    columns=[
-        "zaretzki_index",
-        "atomic_index",
-        "zaretzki_atomic_index",
-        "bde",
-        "som_level",
-    ]
-)
-
-# Add the zaretzki index and the atomic index to the dataframe
-for i in range(15):
-    # append the zaretzki index and the atomic index to the dataframe
-    df_low_bde_som = pd.concat(
-        [
-            df_low_bde_som,
-            som_df[som_df["bde"].between(bins[i], bins[i + 1])][
-                [
-                    "zaretzki_index",
-                    "atomic_index",
-                    "zaretzki_atomic_index",
-                    "bde",
-                    "som_level",
-                ]
-            ],
-        ],
-        ignore_index=True,
-    )
-
-    df_low_bde_non_som = pd.concat(
-        [
-            df_low_bde_non_som,
-            non_som_df[non_som_df["bde"].between(bins[i], bins[i + 1])][
-                [
-                    "zaretzki_index",
-                    "atomic_index",
-                    "zaretzki_atomic_index",
-                    "bde",
-                    "som_level",
-                ]
-            ],
-        ],
-        ignore_index=True,
-    )
-
-
-# Save the dataframe to a csv file
-df_low_bde_som = df_low_bde_som.drop_duplicates(subset="zaretzki_atomic_index")
-df_low_bde_non_som = df_low_bde_non_som.drop_duplicates(subset="zaretzki_atomic_index")
-
-df_low_bde_som.to_csv("../../data/bins/bde_som/low_bde_som.csv", index=False)
-df_low_bde_non_som.to_csv("../../data/bins/bde_som/low_bde_non_som.csv", index=False)
-print(len(df_low_bde_som))
-print(len(df_low_bde_non_som))
-
-
-# Get the average bde
-print(f"average bde of all: {dataset['bde'].mean()}")
