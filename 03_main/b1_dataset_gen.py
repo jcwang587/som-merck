@@ -4,7 +4,6 @@ from rdkit import Chem
 import pandas as pd
 import os
 import sys
-import json
 
 sys.path.append("../src")
 from utils import get_primary_som, get_secondary_som, get_tertiary_som
@@ -23,13 +22,13 @@ def compute_relative_values(data_dict, min_val, max_val):
 
 
 # Initialize all possible data points
-all_c_mae_dir = "../data/zaretzki/1_c/mae_bde_epik_available"
+all_c_mae_dir = "../data/merck"
 all_c_mae_files = [f for f in os.listdir(all_c_mae_dir) if f.endswith(".mae")]
 all_c_mae_files.sort()
 
 # Feature 1: Intrinsic Reactivity
 # absolute intrinsic reactivity calculated by epik cyp function
-epik_cyp_mae_dir = "../data/epik_cyp/zaretzki_carbon_3a4"
+epik_cyp_mae_dir = "../data/ir/mae"
 epik_cyp_mae_files = [f for f in os.listdir(epik_cyp_mae_dir) if f.endswith(".mae")]
 epik_cyp_mae_files.sort()
 ir_dict = {}
@@ -72,7 +71,7 @@ for mae_file in epik_cyp_mae_files:
 
 # Feature 3: BDE
 # BDE calculated by qmox
-qmox_mae_dir = "../data/qmox/mae_bde"
+qmox_mae_dir = "../data/qmox"
 qmox_mae_files = [f for f in os.listdir(qmox_mae_dir) if f.endswith(".mae")]
 qmox_mae_files.sort()
 
@@ -115,7 +114,7 @@ for mae_file in qmox_mae_files:
 
 # Feature 8: SASA Hydrogen Maestro
 # SASA of average hydrogen atoms calculated by maestro function
-sasa_hydrogen_maestro_dir = "../data/sasa/mae_sasa_h"
+sasa_hydrogen_maestro_dir = "../data/sasa"
 sasa_hydrogen_maestro_files = [f for f in os.listdir(sasa_hydrogen_maestro_dir) if f.endswith(".mae")]
 sasa_hydrogen_maestro_files.sort()
 
