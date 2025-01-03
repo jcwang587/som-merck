@@ -1,5 +1,3 @@
-from schrodinger.structure import StructureReader
-
 import matplotlib.pyplot as plt
 from matplotlib_venn import venn3, venn3_circles
 import matplotlib_venn
