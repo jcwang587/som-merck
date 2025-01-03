@@ -166,4 +166,3 @@ df_high_relative_ir_som.to_csv(
 df_high_relative_ir_non_som.to_csv(
     "../data/bins/relative_ir_som/high_relative_ir_non_som.csv", index=False
 )
-

@@ -38,9 +38,7 @@ for mae_file in epik_cyp_mae_files:
     ir_dict[mae_file_index] = {}
     for atom in structure.atom:
         if "r_cyp_CYP_reactivity" in atom.property:
-            ir_dict[mae_file_index][atom.index] = -atom.property[
-                "r_cyp_CYP_reactivity"
-            ]
+            ir_dict[mae_file_index][atom.index] = -atom.property["r_cyp_CYP_reactivity"]
 
 # Feature 2: Relative Intrinsic Reactivity
 # relative_intrinsic_reactivity within each molecule
@@ -115,7 +113,9 @@ for mae_file in qmox_mae_files:
 # Feature 5: SASA Hydrogen Maestro
 # SASA of average hydrogen atoms calculated by maestro function
 sasa_hydrogen_maestro_dir = "../data/sasa"
-sasa_hydrogen_maestro_files = [f for f in os.listdir(sasa_hydrogen_maestro_dir) if f.endswith(".mae")]
+sasa_hydrogen_maestro_files = [
+    f for f in os.listdir(sasa_hydrogen_maestro_dir) if f.endswith(".mae")
+]
 sasa_hydrogen_maestro_files.sort()
 
 sasa_hydrogen_maestro_dict = {}
@@ -130,7 +130,9 @@ for mae_file in sasa_hydrogen_maestro_files:
             # Find the hydrogen atoms attached to the carbon atoms
             for bond in atom.bond:
                 if bond.atom1.element == "H" or bond.atom2.element == "H":
-                    hydrogen_atoms.append(bond.atom1 if bond.atom1.element == "H" else bond.atom2)
+                    hydrogen_atoms.append(
+                        bond.atom1 if bond.atom1.element == "H" else bond.atom2
+                    )
 
             hydrogen_sasa = 0
             # Get the SASA of the hydrogen atoms
@@ -138,7 +140,11 @@ for mae_file in sasa_hydrogen_maestro_files:
                 if "r_user_sasa" in hydrogen_atom.property:
                     hydrogen_sasa += hydrogen_atom.property["r_user_sasa"]
 
-            hydrogen_sasa = hydrogen_sasa / len(hydrogen_atoms) if len(hydrogen_atoms) > 0 else pd.NA
+            hydrogen_sasa = (
+                hydrogen_sasa / len(hydrogen_atoms)
+                if len(hydrogen_atoms) > 0
+                else pd.NA
+            )
             sasa_hydrogen_maestro_dict[mae_file_index][atom.index] = hydrogen_sasa
 
 
@@ -152,7 +158,9 @@ for mae_file_index in sasa_hydrogen_maestro_dict.keys():
     temp_sasa = [value for value in temp_sasa if pd.notna(value)]
     min_sasa = min(temp_sasa)
     max_sasa = max(temp_sasa)
-    relative_sasa_hydrogen_maestro_dict[mae_file_index] = compute_relative_values(sasa_hydrogen_maestro_dict[mae_file_index], min_sasa, max_sasa)
+    relative_sasa_hydrogen_maestro_dict[mae_file_index] = compute_relative_values(
+        sasa_hydrogen_maestro_dict[mae_file_index], min_sasa, max_sasa
+    )
 
 
 # Property 1: Atomic number
@@ -165,7 +173,7 @@ for mae_file in all_c_mae_files:
     for atom in structure.atom:
         atomic_number_dict[mae_file_index][atom.index] = atom.property.get(
             "i_m_atomic_number"
-        ) 
+        )
 
 
 # Property 2: Hydrogen Neighbor
@@ -256,7 +264,13 @@ for mae_file in all_c_mae_files:
         )
         som_dict[mae_file_index][atom.index] = 1 if atom.index in som_all else 0
         som_level_dict[mae_file_index][atom.index] = (
-            3 if atom.index in primary_som_all else 2 if atom.index in secondary_som_all else 1 if atom.index in tertiary_som_all else 0
+            3
+            if atom.index in primary_som_all
+            else (
+                2
+                if atom.index in secondary_som_all
+                else 1 if atom.index in tertiary_som_all else 0
+            )
         )
 
 
@@ -300,12 +314,12 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
         relative_ir_value = relative_ir_dict.get(zaretzki_index, {}).get(
             atomic_index, pd.NA
         )
-        sasa_hydrogen_maestro_value = sasa_hydrogen_maestro_dict.get(zaretzki_index, {}).get(
-            atomic_index, pd.NA
-        )
-        relative_sasa_hydrogen_maestro_value = relative_sasa_hydrogen_maestro_dict.get(zaretzki_index, {}).get(
-            atomic_index, pd.NA
-        )
+        sasa_hydrogen_maestro_value = sasa_hydrogen_maestro_dict.get(
+            zaretzki_index, {}
+        ).get(atomic_index, pd.NA)
+        relative_sasa_hydrogen_maestro_value = relative_sasa_hydrogen_maestro_dict.get(
+            zaretzki_index, {}
+        ).get(atomic_index, pd.NA)
 
         dataset = dataset.append(
             {
