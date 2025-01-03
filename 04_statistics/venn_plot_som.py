@@ -65,18 +65,15 @@ plt.savefig("./venn_plot_som.png", dpi=300, bbox_inches="tight")
 
 # print the zaretzki_atomic_index of the atoms in low bde only
 low_bde_only = set(bde_som["zaretzki_atomic_index"]) - set(relative_ir_som["zaretzki_atomic_index"]) - set(sasa_som["zaretzki_atomic_index"])
-print(low_bde_only)
-print(len(low_bde_only))    
+print(f"low_bde_only: {low_bde_only}")  
 
 # print the zaretzki_atomic_index of the atoms in high relative ir only
 high_relative_ir_only = set(relative_ir_som["zaretzki_atomic_index"]) - set(bde_som["zaretzki_atomic_index"]) - set(sasa_som["zaretzki_atomic_index"])
-print(high_relative_ir_only)
-print(len(high_relative_ir_only))    
+print(f"high_relative_ir_only: {high_relative_ir_only}")  
 
 # print the zaretzki_atomic_index of the atoms in high sasa only
 high_sasa_only = set(sasa_som["zaretzki_atomic_index"]) - set(bde_som["zaretzki_atomic_index"]) - set(relative_ir_som["zaretzki_atomic_index"])
-print(high_sasa_only)
-print(len(high_sasa_only))    
+print(f"high_sasa_only: {high_sasa_only}")  
 
 # print the zaretzki_atomic_index of the atoms 
 # remove na rows
@@ -84,5 +81,4 @@ all_data = all_data.dropna()
 all_som_index = all_data[all_data["som"] == 1]["zaretzki_atomic_index"].tolist()
 
 others = set(all_som_index) - unique_index
-print(others)
-print(len(others))    
+print(f"others: {others}")  
