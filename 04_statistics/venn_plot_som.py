@@ -7,10 +7,10 @@ import pandas as pd
 
 
 # Load the data
-all_som = pd.read_csv("../../data/dataset/dataset_all_sites.csv")
-bde_som = pd.read_csv("../../data/bins/bde_som/low_bde_som.csv")
-relative_ir_som = pd.read_csv("../../data/bins/relative_ir_som/high_relative_ir_som.csv")
-sasa_som = pd.read_csv("../../data/bins/sasa_som/high_sasa_maestro_som.csv")
+all_som = pd.read_csv("../data/dataset/dataset_all_sites.csv")
+bde_som = pd.read_csv("../data/bins/bde_som/low_bde_som.csv")
+relative_ir_som = pd.read_csv("../data/bins/relative_ir_som/high_relative_ir_som.csv")
+sasa_som = pd.read_csv("../data/bins/sasa_som/high_sasa_maestro_som.csv")
 
 print(len(bde_som))
 print(len(relative_ir_som))
