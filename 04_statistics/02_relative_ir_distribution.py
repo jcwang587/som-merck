@@ -97,3 +97,73 @@ ax.legend(frameon=False, loc="upper left", bbox_to_anchor=(0.25, 1))
 plt.tight_layout()
 plt.savefig("./relative_ir_distribution_som.png")
 plt.close()
+
+
+# Initialize the dataframe first column is the zaretzki index and the second column is the atomic index
+df_high_relative_ir_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "relative_ir",
+        "som_level",
+    ]
+)
+df_high_relative_ir_non_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "relative_ir",
+        "som_level",
+    ]
+)
+
+# For loop from 10 to 20
+for i in range(10, 20):
+    df_high_relative_ir_som = pd.concat(
+        [
+            df_high_relative_ir_som,
+            som_df[som_df["relative_ir"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "relative_ir",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+    df_high_relative_ir_non_som = pd.concat(
+        [
+            df_high_relative_ir_non_som,
+            non_som_df[non_som_df["relative_ir"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "relative_ir",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+
+# Save the dataframe to a csv file
+df_high_relative_ir_som = df_high_relative_ir_som.drop_duplicates(
+    subset="zaretzki_atomic_index"
+)
+df_high_relative_ir_non_som = df_high_relative_ir_non_som.drop_duplicates(
+    subset="zaretzki_atomic_index"
+)
+df_high_relative_ir_som.to_csv(
+    "../data/bins/relative_ir_som/high_relative_ir_som.csv", index=False
+)
+df_high_relative_ir_non_som.to_csv(
+    "../data/bins/relative_ir_som/high_relative_ir_non_som.csv", index=False
+)
+

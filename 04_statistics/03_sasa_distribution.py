@@ -97,3 +97,77 @@ ax.set_ylim(0, 60)
 plt.tight_layout()
 plt.savefig("./sasa_hydrogen_distribution_all.png")
 plt.close()
+
+
+# Initialize the dataframe first column is the zaretzki index and the second column is the atomic index
+df_high_sasa_maestro_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "sasa_hydrogen_maestro",
+        "som_level",
+    ]
+)
+df_high_sasa_maestro_non_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "sasa_hydrogen_maestro",
+        "som_level",
+    ]
+)
+
+for i in range(9, 20):
+    df_high_sasa_maestro_som = pd.concat(
+        [
+            df_high_sasa_maestro_som,
+            som_df[som_df["sasa_hydrogen_maestro"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "sasa_hydrogen_maestro",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+    df_high_sasa_maestro_non_som = pd.concat(
+        [
+            df_high_sasa_maestro_non_som,
+            non_som_df[
+                non_som_df["sasa_hydrogen_maestro"].between(bins[i], bins[i + 1])
+            ][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "sasa_hydrogen_maestro",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+
+# Save the dataframe to a csv file
+df_high_sasa_maestro_som = df_high_sasa_maestro_som.drop_duplicates(
+    subset="zaretzki_atomic_index"
+)
+df_high_sasa_maestro_non_som = df_high_sasa_maestro_non_som.drop_duplicates(
+    subset="zaretzki_atomic_index"
+)
+df_high_sasa_maestro_som.to_csv(
+    "../data/bins/sasa_som/high_sasa_maestro_som.csv", index=False
+)
+df_high_sasa_maestro_non_som.to_csv(
+    "../data/bins/sasa_som/high_sasa_maestro_non_som.csv", index=False
+)
+
+# Get the average sasa
+print(f"average sasa of all: {dataset['sasa_hydrogen_maestro'].mean()}")
