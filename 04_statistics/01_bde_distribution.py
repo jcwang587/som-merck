@@ -1,9 +1,5 @@
 import matplotlib.pyplot as plt
 import pandas as pd
-import sys
-
-sys.path.append("../src/")
-from utils import renew_folder
 
 
 # Load the dataset
