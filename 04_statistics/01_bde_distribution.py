@@ -99,7 +99,7 @@ plt.savefig("./bde_distribution_som.png")
 plt.close()
 
 # Initialize the dataframe first column is the zaretzki index and the second column is the atomic index
-df_high_bde_som = pd.DataFrame(
+df_low_bde_som = pd.DataFrame(
     columns=[
         "zaretzki_index",
         "atomic_index",
@@ -108,7 +108,7 @@ df_high_bde_som = pd.DataFrame(
         "som_level",
     ]
 )
-df_high_bde_non_som = pd.DataFrame(
+df_low_bde_non_som = pd.DataFrame(
     columns=[
         "zaretzki_index",
         "atomic_index",
@@ -120,9 +120,9 @@ df_high_bde_non_som = pd.DataFrame(
 
 # For loop from 1 to 15
 for i in range(1, 15):
-    df_high_bde_som = pd.concat(
+    df_low_bde_som = pd.concat(
         [
-            df_high_bde_som,
+            df_low_bde_som,
             som_df[som_df["bde"].between(bins[i], bins[i + 1])][
                 [
                     "zaretzki_index",
@@ -135,9 +135,9 @@ for i in range(1, 15):
         ],
         ignore_index=True,
     )
-    df_high_bde_non_som = pd.concat(
+    df_low_bde_non_som = pd.concat(
         [
-            df_high_bde_non_som,
+            df_low_bde_non_som,
             non_som_df[non_som_df["bde"].between(bins[i], bins[i + 1])][
                 [
                     "zaretzki_index",
@@ -153,12 +153,12 @@ for i in range(1, 15):
 
 
 # Save the dataframe to a csv file
-df_high_bde_som = df_high_bde_som.drop_duplicates(
+df_low_bde_som = df_low_bde_som.drop_duplicates(
     subset="zaretzki_atomic_index"
 )
-df_high_bde_non_som = df_high_bde_non_som.drop_duplicates(
+df_low_bde_non_som = df_low_bde_non_som.drop_duplicates(
     subset="zaretzki_atomic_index"
 )
-df_high_bde_som.to_csv("../data/bins/bde_som/high_bde_som.csv", index=False)
-df_high_bde_non_som.to_csv("../data/bins/bde_som/high_bde_non_som.csv", index=False)
+df_low_bde_som.to_csv("../data/bins/bde_som/low_bde_som.csv", index=False)
+df_low_bde_non_som.to_csv("../data/bins/bde_som/low_bde_non_som.csv", index=False)
 
