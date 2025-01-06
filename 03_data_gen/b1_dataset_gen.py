@@ -73,6 +73,10 @@ qmox_mae_dir = "../data/qmox_mae"
 qmox_mae_files = [f for f in os.listdir(qmox_mae_dir) if f.endswith(".mae")]
 qmox_mae_files.sort()
 
+qmox_csv_dir = "../data/qmox_csv"
+qmox_csv_files = [f for f in os.listdir(qmox_csv_dir) if f.endswith(".csv")]
+qmox_csv_files.sort()
+
 bde_dict = {}
 for mae_file in qmox_mae_files:
     structure = StructureReader.read(os.path.join(qmox_mae_dir, mae_file))
@@ -81,6 +85,18 @@ for mae_file in qmox_mae_files:
     for atom in structure.atom:
         if "r_user_CH-BDE" in atom.property:
             bde_dict[mae_file_index][atom.index] = atom.property["r_user_CH-BDE"]
+for csv_file in qmox_csv_files:
+    csv_file_index = csv_file.split("_")[0]
+    bde_dict[csv_file_index] = {}
+    # get the first column as the atomic index
+    df = pd.read_csv(os.path.join(qmox_csv_dir, csv_file))
+    index_list = df.iloc[:, 0].tolist()
+    element_list = [index[0] for index in index_list]
+    atomic_index_list = [int(index[1:]) for index in index_list]
+    bde_list = df.iloc[:, 1].tolist()
+    for i in range(len(atomic_index_list)):
+        bde_dict[csv_file_index][atomic_index_list[i]] = bde_list[i]
+
 
 
 # Feature 4: Relative BDE
