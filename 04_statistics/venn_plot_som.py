@@ -107,3 +107,4 @@ all_som_index = all_data[all_data["som"] == 1]["zaretzki_atomic_index"].tolist()
 
 others = set(all_som_index) - unique_index
 print(f"others: {others}")
+
