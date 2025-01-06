@@ -69,7 +69,7 @@ for mae_file in epik_cyp_mae_files:
 
 # Feature 3: BDE
 # BDE calculated by qmox
-qmox_mae_dir = "../data/qmox"
+qmox_mae_dir = "../data/qmox_mae"
 qmox_mae_files = [f for f in os.listdir(qmox_mae_dir) if f.endswith(".mae")]
 qmox_mae_files.sort()
 
