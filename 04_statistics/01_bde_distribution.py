@@ -42,7 +42,7 @@ fig, ax = plt.subplots(figsize=(14, 6))
 n, bins, patches = ax.hist(
     [som_df["bde"], non_som_df["bde"]],
     bins=bins,
-    label=["SOM", "Non SOM"],
+    label=["Experimental SOM", "Experimental Non SOM"],
     color=["#CC5F5A", "#82ABA3"],
     edgecolor="black",
     stacked=True,

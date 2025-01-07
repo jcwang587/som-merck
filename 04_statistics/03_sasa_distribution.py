@@ -46,7 +46,7 @@ fig, ax = plt.subplots(figsize=(14, 6))
 n, bins, patches = ax.hist(
     [som_df["sasa_hydrogen_maestro"], non_som_df["sasa_hydrogen_maestro"]],
     bins=bins,
-    label=["SOM", "Non SOM"],
+    label=["Experimental SOM", "Experimental Non SOM"],
     color=["#CC5F5A", "#82ABA3"],
     edgecolor="black",
     stacked=True,
