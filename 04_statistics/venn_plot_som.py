@@ -67,7 +67,7 @@ unique_index = (
 plt.text(
     0.7,
     0.2,
-    f"Others: 2",
+    f"Others: 1",
     fontsize=24,
     fontweight="bold",
     transform=plt.gcf().transFigure,

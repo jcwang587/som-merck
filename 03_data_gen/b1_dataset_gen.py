@@ -98,35 +98,7 @@ for csv_file in qmox_csv_files:
         bde_dict[csv_file_index][atomic_index_list[i]] = bde_list[i]
 
 
-
-# Feature 4: Relative BDE
-# relative BDE within each molecule
-relative_bde_dict = {}
-for mae_file in qmox_mae_files:
-    structure = StructureReader.read(os.path.join(qmox_mae_dir, mae_file))
-    mae_file_index = mae_file.split("_")[0]
-    temp_bde = []
-    for atom in structure.atom:
-        if "r_user_CH-BDE" in atom.property:
-            temp_bde.append(atom.property["r_user_CH-BDE"])
-
-    min_bde = min(temp_bde)
-    max_bde = max(temp_bde)
-
-    relative_bde_dict[mae_file_index] = {}
-    if max_bde == min_bde:
-        for atom in structure.atom:
-            if "r_user_CH-BDE" in atom.property:
-                relative_bde_dict[mae_file_index][atom.index] = 0.5
-    else:
-        for atom in structure.atom:
-            if "r_user_CH-BDE" in atom.property:
-                relative_bde_dict[mae_file_index][atom.index] = (
-                    atom.property["r_user_CH-BDE"] - min_bde
-                ) / (max_bde - min_bde)
-
-
-# Feature 5: SASA Hydrogen Maestro
+# Feature 4: SASA Hydrogen Maestro
 # SASA of average hydrogen atoms calculated by maestro function
 sasa_hydrogen_maestro_dir = "../data/sasa"
 sasa_hydrogen_maestro_files = [
@@ -162,21 +134,6 @@ for mae_file in sasa_hydrogen_maestro_files:
                 else pd.NA
             )
             sasa_hydrogen_maestro_dict[mae_file_index][atom.index] = hydrogen_sasa
-
-
-# Feature 6: Relative SASA Hydrogen Maestro
-# relative SASA of hydrogen atoms within each molecule
-relative_sasa_hydrogen_maestro_dict = {}
-for mae_file_index in sasa_hydrogen_maestro_dict.keys():
-    temp_sasa = []
-    for value in sasa_hydrogen_maestro_dict[mae_file_index].values():
-        temp_sasa.append(value)
-    temp_sasa = [value for value in temp_sasa if pd.notna(value)]
-    min_sasa = min(temp_sasa)
-    max_sasa = max(temp_sasa)
-    relative_sasa_hydrogen_maestro_dict[mae_file_index] = compute_relative_values(
-        sasa_hydrogen_maestro_dict[mae_file_index], min_sasa, max_sasa
-    )
 
 
 # Property 1: Atomic number
@@ -305,9 +262,7 @@ dataset = pd.DataFrame(
         "ir",
         "relative_ir",
         "bde",
-        "relative_bde",
         "sasa_hydrogen_maestro",
-        "relative_sasa_hydrogen_maestro",
         "primary_som",
         "secondary_som",
         "tertiary_som",
@@ -323,17 +278,11 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
 
         # Check if zaretzki_index exists in reactivity_dict
         bde_value = bde_dict.get(zaretzki_index, {}).get(atomic_index, pd.NA)
-        relative_bde_value = relative_bde_dict.get(zaretzki_index, {}).get(
-            atomic_index, pd.NA
-        )
         ir_value = ir_dict.get(zaretzki_index, {}).get(atomic_index, pd.NA)
         relative_ir_value = relative_ir_dict.get(zaretzki_index, {}).get(
             atomic_index, pd.NA
         )
         sasa_hydrogen_maestro_value = sasa_hydrogen_maestro_dict.get(
-            zaretzki_index, {}
-        ).get(atomic_index, pd.NA)
-        relative_sasa_hydrogen_maestro_value = relative_sasa_hydrogen_maestro_dict.get(
             zaretzki_index, {}
         ).get(atomic_index, pd.NA)
 
@@ -353,9 +302,7 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
                 "ir": ir_value,
                 "relative_ir": relative_ir_value,
                 "bde": bde_value,
-                "relative_bde": relative_bde_value,
                 "sasa_hydrogen_maestro": sasa_hydrogen_maestro_value,
-                "relative_sasa_hydrogen_maestro": relative_sasa_hydrogen_maestro_value,
                 "primary_som": primary_som_dict[zaretzki_index][atomic_index],
                 "secondary_som": secondary_som_dict[zaretzki_index][atomic_index],
                 "tertiary_som": tertiary_som_dict[zaretzki_index][atomic_index],
