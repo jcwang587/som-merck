@@ -87,7 +87,7 @@ ax.set_ylabel("Count")
 # Add a vertical dash line at x=94
 ax.axvline(x=94, color="black", linestyle="--", linewidth=2)
 ax.set_xlim(62, 110)
-ax.set_ylim(0, 100)
+ax.set_ylim(0, 110)
 ax.legend(frameon=False, loc="upper left")
 
 plt.tight_layout()

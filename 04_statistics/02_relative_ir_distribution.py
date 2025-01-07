@@ -91,7 +91,7 @@ ax.set_ylabel("Count")
 ax.axvline(x=0.5, color="black", linestyle="--", linewidth=2)
 
 ax.set_xlim(-0.05, 1.05)
-ax.set_ylim(0, 80)
+ax.set_ylim(0, 90)
 ax.legend(frameon=False, loc="upper left", bbox_to_anchor=(0.25, 1))
 
 plt.tight_layout()
