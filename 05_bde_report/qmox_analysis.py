@@ -1,16 +1,11 @@
 from pathlib import Path
-import os, subprocess, argparse, sys, getpass, re, shutil, warnings, numpy, json
+import os, warnings
 
 warnings.filterwarnings("ignore")
 
-from schrodinger.structutils import analyze, rmsd
 
-from contextlib import contextmanager
-
-from schrodinger.utils import log, cmdline
-from schrodinger.job import launchapi, jobcontrol
 from schrodinger.structure import StructureReader
-from schrodinger import structure, adapter
+from schrodinger import adapter
 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
@@ -19,10 +14,8 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Image
 from reportlab.platypus import Spacer, Table, TableStyle
 from reportlab.lib import colors
 
-import pandas as pd
 import matplotlib.pyplot as plt
 from matplotlib.patches import Rectangle
-import numpy as np
 
 from PIL import Image as ImagePIL
 from PIL import ImageChops
@@ -34,14 +27,9 @@ rdDepictor.SetPreferCoordGen(True)
 from rdkit.Chem.Draw import rdMolDraw2D
 
 
-logger = log.get_output_logger("qmox_analysis.py")
-log.default_logging_config()
-
-
-
 
 def create_image(
-    st, mode="C", out_dir=Path().resolve(), name="labeled", inkscape_path: Path = None
+    st, mode="C", out_dir=Path().resolve(), name="labeled"
 ):
     """
     Create image function compatible with the Schrodinger python
@@ -55,7 +43,6 @@ def create_image(
         if mode == atom.GetSymbol():
             atom.SetProp("_displayLabel", f"{mode}<sub>{str(i+1)}</sub>")
 
-    print("Deleting Hydrogens 2")
     molecule = Chem.RemoveHs(molecule)
 
     rdDepictor.Compute2DCoords(molecule)
@@ -135,14 +122,49 @@ def create_risk_scale_png(
 class CoxidesAnalysis:
 
     def __init__(
-        self, dir_report: Path, title: str, medium_coff: float, high_coff: float
+        self, dir_report: Path, path_structure: Path, title: str, medium_coff: float, high_coff: float
     ):
         self.dir_report = dir_report
+        self.path_structure = path_structure
         self.title = title
         self.medium_coff = medium_coff
         self.high_coff = high_coff
+        self.structure = StructureReader.read(self.path_structure)
+        self.dft = "B3LYP"
+        self.basis = "6-31G(d,p)"
 
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
+        self.img = create_image(self.structure, mode='C')
+
+        # Give a fake data
+        self.data = self.GenerateDataList()
+
+    def GenerateDataList(self):
+        ''' 
+        Take information from self.structure to create a Data list for report 
+        generation
+        '''
+        
+        print('Creating Reports...')
+        print('Generating BDE table data...')
+        data = [['Atom', 'BDE (kcal/mol)', 'Propensity']]
+        
+        for atom in self.structure.atom:
+            try:
+                bde = float(atom.property['r_user_CH-BDE']) 
+                if bde < self.high_coff:
+                    propensity = 'High'
+                if bde <= self.medium_coff and bde >= self.high_coff:
+                    propensity = 'Moderate'                    
+                if bde > self.medium_coff:
+                    propensity = 'Low'
+                row = [str(atom.element) + str(atom.index), 
+                str(atom.property['r_user_CH-BDE']), propensity]
+                data.append(row)
+            except KeyError:
+                pass
+        
+        return data
 
     def CreatePDFReport(self):
         """Create pdf report from a data dictionary and structural image"""
@@ -181,7 +203,7 @@ class CoxidesAnalysis:
         story.append(
             Paragraph(
                 "This report covers the results for BDE calculations"
-                f" performed for: {self.title}. Oxudation propensity is established using "
+                f" performed for: {self.title}. Oxidation propensity is established using "
                 "C-H Bond Dissociation Enthalpies (BDE). The lower the C-H BDE values the "
                 "higher the propensity for C-oxidation. Details for the DFT calculations and"
                 " overall workflow are explained at the end of this document",
@@ -226,9 +248,6 @@ class CoxidesAnalysis:
                 styleNormal,
             )
         )
-        story.append(Spacer(inch, 0.1 * inch))
-
-        story.append(Paragraph(f"Output files:\n {str(self.dir_report)}"))
 
         # Save PDF
         pdf_file = self.dir_report / f"{self.title}_CH-BDE_report.pdf"
@@ -245,11 +264,24 @@ class CoxidesAnalysis:
 
 if __name__ == "__main__":
 
-    C_HIGH_COFF = 85
-    C_MEDIUM_COFF = 96
+    C_HIGH_COFF = 88
+    C_MEDIUM_COFF = 94
+
+    # Generate the risk scale image
+    create_risk_scale_png(medium=C_MEDIUM_COFF, high=C_HIGH_COFF, filename=Path("./bde_report/C-oxidation_risk_scale.png"))
+
+    mae_dir = Path("../data/qmox_mae")
+    mae_files = mae_dir.glob("*.mae")
 
     # Generate the pdf report using the CoxidesAnalysis
-    qmox_analysis = CoxidesAnalysis(
-        dir_report=Path("./bde_report"), title="test_data", medium_coff=C_MEDIUM_COFF, high_coff=C_HIGH_COFF
-    )
-    qmox_analysis.CreatePDFReport()
+    for mae_file in mae_files:
+        mae_structure = StructureReader.read(mae_file)
+
+        qmox_analysis = CoxidesAnalysis(
+            dir_report=Path("./bde_report"), 
+            path_structure=Path(mae_file),
+            title=mae_structure.title,
+            medium_coff=C_MEDIUM_COFF, 
+            high_coff=C_HIGH_COFF
+        )
+        qmox_analysis.CreatePDFReport()
