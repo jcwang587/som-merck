@@ -9,7 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_ff_OPLSVersion
@@ -19,7 +18,6 @@ f_m_ct {
   0
   diazepam 
   13
-  10
   "Yang et al.,Drug Metab. Disp.,27,102,1999" 
   0
   OPLS4 

@@ -9,7 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- s_sd_SECONDARY\_SOM
  s_sd_Citation
  s_sd_DOI
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
@@ -27,7 +26,6 @@ f_m_ct {
   1
   buprenorphine 
   31
-  "1 6" 
   "Picard et al.,Drug Metab. Disp.,33,689,2005" 
   10.1124/dmd.105.003681 
   1

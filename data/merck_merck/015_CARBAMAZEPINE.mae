@@ -9,8 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  s_sd_PRIMARY\_SOM
- s_sd_SECONDARY\_SOM
- s_sd_TERTIARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_ff_OPLSVersion
@@ -20,8 +18,6 @@ f_m_ct {
   0
   CARBAMAZEPINE 
   "15 12" 
-  "18 17" 
-  "16 13" 
   "Parkinson, A.,Biotransformation of xenobiotics. In C. D. Klaassen (ed.), Casarett and Doull's Toxicology: The Basic Science of Poinsons,172,2001" 
   1
   OPLS4 

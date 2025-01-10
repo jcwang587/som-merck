@@ -9,7 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
  s_sd_Citation
  s_sd_DOI
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
@@ -21,7 +20,6 @@ f_m_ct {
   1
   verapamil 
   13
-  25
   "Tracy et al.,Br. J. Clin. Pharma.,47,545,1999" 
   10.1046/j.136502125.1999.00923.x. 
   1

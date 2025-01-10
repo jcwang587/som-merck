@@ -9,7 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_st_Chirality_1
@@ -23,7 +22,6 @@ f_m_ct {
   1
   quinidine 
   15
-  13
   "Nielsen et al.,J. Pharmacol. Exp. Ther.,289,31,1999" 
   1
   11_S_24_12_10_30 

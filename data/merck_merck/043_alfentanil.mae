@@ -9,7 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
  s_sd_Citation
  s_sd_DOI
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
@@ -20,7 +19,6 @@ f_m_ct {
   0
   alfentanil 
   10
-  18
   "Klees et al.,Drug Metab. Dispos.,33,303,2005" 
   10.1124/dmb.104.0020790 
   1

@@ -9,8 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
- s_sd_TERTIARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_st_Chirality_1
@@ -26,8 +24,6 @@ f_m_ct {
   1
   testosterone 
   7
-  15
-  "1 16 17 20" 
   "Yamazaki and Shimada,Arch. Biochem. Biophys.,346,161,1997" 
   1
   5_R_4_10_6_18 

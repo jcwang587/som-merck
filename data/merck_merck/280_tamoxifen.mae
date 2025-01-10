@@ -9,8 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  s_sd_PRIMARY\_SOM
- i_sd_SECONDARY\_SOM
- s_sd_TERTIARY\_SOM
  s_sd_Citation
  s_sd_DOI
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
@@ -21,8 +19,6 @@ f_m_ct {
   0
   tamoxifen 
   "27 28" 
-  6
-  "21 22" 
   "Desta et al.,J. Pharm. Exp. Ther.,310,1062,2004" 
   10.1124/jpet.104.065607 
   1

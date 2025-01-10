@@ -9,8 +9,6 @@ f_m_ct {
  b_sd_chiral_flag
  s_sd_ID
  i_sd_PRIMARY\_SOM
- s_sd_SECONDARY\_SOM
- i_sd_TERTIARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_ff_OPLSVersion
@@ -20,8 +18,6 @@ f_m_ct {
   0
   haloperidol 
   7
-  "5 1" 
-  3
   "Fang et al.,Drug Metab. Disp.,12,1638,2001
 Avent et al.,Chem. Res. Toxicol.,19,914,2006" 
   1
