@@ -58,7 +58,9 @@ def calculate_sasa(conformer_path):
 
 
 def main():
-    sdf_conformer_energy_dir = "../data/conformer"
+    # sdf_conformer_energy_dir = "../data/conformer"
+
+    sdf_conformer_energy_dir = "./"
 
     for file in os.listdir(sdf_conformer_energy_dir):
         if file.endswith(".sdf"):
