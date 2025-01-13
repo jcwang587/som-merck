@@ -3,7 +3,7 @@
 # Start a local job server
 /apps/prod/COMPCHEM/schrodinger/schrodinger/jsc local-server-start
 
-cd ../data/merck
+# cd ../data/merck
 
 # Get all the files in the current directory
 for file in $(ls); do

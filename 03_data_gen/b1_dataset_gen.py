@@ -22,7 +22,7 @@ def compute_relative_values(data_dict, min_val, max_val):
 
 
 # Initialize all possible data points
-all_c_mae_dir = "../data/merck"
+all_c_mae_dir = "../data/merck_zaretzki"
 all_c_mae_files = [f for f in os.listdir(all_c_mae_dir) if f.endswith(".mae")]
 all_c_mae_files.sort()
 

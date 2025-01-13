@@ -1,0 +1,37 @@
+COMMAND:
+ /apps/prod/COMPCHEM/schrodinger/schrodinger/epik-v6.9/bin/Linux-x86_64/epik_app -imae 163_iloperidone.mae -omae 3a4_reactivity-163_iloperidone.mae -cyp
+SCHRODINGER: /apps/prod/COMPCHEM/schrodinger/schrodinger
+
+Running Epik Classic version     6.9138
+Epik. Copyright Schrodinger, LLC. All rights reserved.
+
+Input file name:                        163_iloperidone.mae
+Output file name:                       3a4_reactivity-163_iloperidone.mae
+CYP reactivity calculations requested.
+CYP model name:                         CYP
+JobID:                                  4d82532c-d1f4-11ef-9e4f-005056a18acd
+---------------------------
+Processing Input Structure #1
+        Title: iloperidone
+ Calculated Reactivities
+  Atom    Reactivity
+     3     9.02
+     4     4.11
+     6     4.88
+    22     2.71
+    23     2.92
+    25     3.62
+    29    -3.37
+    31     2.20
+    18     2.39
+    19    -1.13
+    11    11.42
+    12     7.43
+    16     7.43
+    13    -3.00
+    15    -3.00
+    17    -4.41
+---------------------------
+
+Job completed at Mon Jan 13 16:21:12 2025
+Elapsed time: 1.58967s
