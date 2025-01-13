@@ -17,10 +17,6 @@ from utils import renew_folder
 renew_folder("../data/svg_merck_merck")
 renew_folder("../data/png_merck_merck")
 
-# Load sdf file with rdkit
-# sdf_file = "../data/zaretzki/0_all/3A4.sdf"
-# suppl = Chem.SDMolSupplier(sdf_file)
-
 mae_folder = "../data/merck_merck"
 mae_files = glob.glob(os.path.join(mae_folder, "*.mae"))
 
