@@ -56,7 +56,7 @@ for patch in patches:
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
-                height / 2,
+                height + 1,
             ),
             xytext=(0, 0),  # No vertical offset
             textcoords="offset points",
