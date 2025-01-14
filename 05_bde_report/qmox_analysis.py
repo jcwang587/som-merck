@@ -58,6 +58,7 @@ def create_image(
         f.write(svg_txt)
 
     os.system(f"convert -density 1200 -resize 500x500 {str(out_svg)} {str(out_png)}")
+    os.remove(out_svg)
 
     return out_png
 
@@ -141,7 +142,7 @@ class CoxidesAnalysis:
         self.basis = "6-31G(d,p)"
 
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
-        self.img = create_image(self.structure, mode='C')
+        self.img = create_image(self.structure, mode='C', name=f"{self.dir_report}/{self.title}")
 
         # Give a fake data
         self.data = self.GenerateDataList()
@@ -266,6 +267,9 @@ class CoxidesAnalysis:
         )
         doc.build(story)
 
+        # Remove the image file
+        os.remove(self.img)
+
         return pdf_file
 
 
@@ -293,3 +297,6 @@ if __name__ == "__main__":
             high_coff=C_HIGH_COFF
         )
         qmox_analysis.CreatePDFReport()
+
+    # Remove the risk scale image
+    os.remove(Path("./test/C-oxidation_risk_scale.png"))
