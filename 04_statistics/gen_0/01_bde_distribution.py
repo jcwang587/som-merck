@@ -40,10 +40,10 @@ fig, ax = plt.subplots(figsize=(14, 6))
 
 # Plot stacked histograms for SOM and Non-SOM
 n, bins, patches = ax.hist(
-    [som_df["bde"]],
+    [som_df["bde"], non_som_df["bde"]],
     bins=bins,
-    label=["Experimental SOM"],
-    color=["#CC5F5A"],
+    label=["Experimental SOM", "Experimental Non SOM"],
+    color=["#CC5F5A", "#82ABA3"],
     edgecolor="black",
     stacked=True,
 )
@@ -65,6 +65,20 @@ for i in range(len(patches)):
                     ha="center",
                     va="center",
                 )
+            else:  # Non-SOM part
+                som_height = patches[0][j].get_height()
+                ax.annotate(
+                    f"{int(height)}",
+                    xy=(
+                        patches[i][j].get_x() + patches[i][j].get_width() / 2,
+                        som_height + height,
+                    ),
+                    xytext=(0, 3),  # 3 points vertical offset
+                    textcoords="offset points",
+                    ha="center",
+                    va="bottom",
+                    color="#82ABA3",
+                )
 
 # rotate the x-axis labels
 ax.set_xlabel("BDE")
@@ -74,7 +88,68 @@ ax.set_ylabel("Count")
 ax.axvline(x=94, color="black", linestyle="--", linewidth=2)
 ax.set_xlim(62, 110)
 ax.set_ylim(0, 110)
+ax.legend(frameon=False, loc="upper left")
 
 plt.tight_layout()
 plt.savefig("./bde_distribution_som.png")
 plt.close()
+
+# Initialize the dataframe first column is the zaretzki index and the second column is the atomic index
+df_low_bde_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "bde",
+        "som_level",
+    ]
+)
+df_low_bde_non_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "bde",
+        "som_level",
+    ]
+)
+
+# For loop from 1 to 15
+for i in range(1, 15):
+    df_low_bde_som = pd.concat(
+        [
+            df_low_bde_som,
+            som_df[som_df["bde"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "bde",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+    df_low_bde_non_som = pd.concat(
+        [
+            df_low_bde_non_som,
+            non_som_df[non_som_df["bde"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "bde",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+
+# Save the dataframe to a csv file
+df_low_bde_som = df_low_bde_som.drop_duplicates(subset="zaretzki_atomic_index")
+df_low_bde_non_som = df_low_bde_non_som.drop_duplicates(subset="zaretzki_atomic_index")
+df_low_bde_som.to_csv("../data/bins/bde_som/low_bde_som.csv", index=False)
+df_low_bde_non_som.to_csv("../data/bins/bde_som/low_bde_non_som.csv", index=False)
