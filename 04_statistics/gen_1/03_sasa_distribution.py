@@ -44,46 +44,30 @@ fig, ax = plt.subplots(figsize=(14, 6))
 
 # Plot stacked histograms for SOM and Non-SOM
 n, bins, patches = ax.hist(
-    [som_df["sasa_hydrogen_maestro"], non_som_df["sasa_hydrogen_maestro"]],
+    som_df["sasa_hydrogen_maestro"],
     bins=bins,
-    label=["Experimental SOM", "Experimental Non SOM"],
-    color=["#CC5F5A", "#82ABA3"],
+    label=["Experimental SOM"],
+    color=["#CC5F5A"],
     edgecolor="black",
     stacked=True,
 )
 
 # Annotate each bar with the count
-for i in range(len(patches)):
-    for j in range(len(patches[i])):
-        height = patches[i][j].get_height()
-        if height > 0:  # Only annotate if the height is greater than 0
-            if i == 0:  # SOM part
-                ax.annotate(
-                    f"{int(height)}",
-                    xy=(
-                        patches[i][j].get_x() + patches[i][j].get_width() / 2,
-                        height / 2,
-                    ),
-                    xytext=(0, 0),  # No vertical offset
-                    textcoords="offset points",
-                    ha="center",
-                    va="center",
-                )
-            else:  # Non-SOM part
-                som_height = patches[0][j].get_height()
-                ax.annotate(
-                    f"{int(height)}",
-                    xy=(
-                        patches[i][j].get_x() + patches[i][j].get_width() / 2,
-                        som_height + height,
-                    ),
-                    xytext=(0, 3),  # 3 points vertical offset
-                    textcoords="offset points",
-                    ha="center",
-                    va="bottom",
-                    color="#82ABA3",
-                )
-
+for patch in patches:
+    height = patch.get_height()
+    if height > 0:  # Only annotate if the height is greater than 0
+        ax.annotate(
+            f"{int(height)}",
+            xy=(
+                patch.get_x() + patch.get_width() / 2,
+                height + 1,
+            ),
+            xytext=(0, 0),  # No vertical offset
+            textcoords="offset points",
+            ha="center",
+            va="center",
+        )
+    
 # Set labels and legend
 ax.set_xlabel("SASA")
 ax.set_ylabel("Count")
