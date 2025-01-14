@@ -60,7 +60,7 @@ for patch in patches:
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
-                height + 1,
+                height + 1 / 25 * 14,
             ),
             xytext=(0, 0),  # No vertical offset
             textcoords="offset points",
@@ -75,8 +75,8 @@ ax.legend(frameon=False, loc="upper right")
 
 # Add a vertical dash line at x=18
 ax.axvline(x=18, color="black", linestyle="--", linewidth=2)
-ax.set_xlim(-2, 42)
-ax.set_ylim(0, 60)
+ax.set_xlim(2, 36)
+ax.set_ylim(0, 14)
 
 plt.tight_layout()
 plt.savefig("./sasa_hydrogen_distribution_all.png")
