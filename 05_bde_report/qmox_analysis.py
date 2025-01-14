@@ -275,9 +275,10 @@ if __name__ == "__main__":
     C_MEDIUM_COFF = 94
 
     # Generate the risk scale image
-    create_risk_scale_png(medium=C_MEDIUM_COFF, high=C_HIGH_COFF, filename=Path("./bde_report/C-oxidation_risk_scale.png"))
+    create_risk_scale_png(medium=C_MEDIUM_COFF, high=C_HIGH_COFF, filename=Path("./test/C-oxidation_risk_scale.png"))
 
-    mae_dir = Path("../data/qmox_mae")
+    # mae_dir = Path("../data/qmox_mae")
+    mae_dir = Path("./test")
     mae_files = mae_dir.glob("*.mae")
 
     # Generate the pdf report using the CoxidesAnalysis
@@ -285,7 +286,7 @@ if __name__ == "__main__":
         mae_structure = StructureReader.read(mae_file)
 
         qmox_analysis = CoxidesAnalysis(
-            dir_report=Path("./bde_report"), 
+            dir_report=Path("./test"), 
             path_structure=Path(mae_file),
             title=mae_structure.title,
             medium_coff=C_MEDIUM_COFF, 
