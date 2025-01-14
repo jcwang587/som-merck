@@ -67,11 +67,11 @@ for patch in patches:
             ha="center",
             va="center",
         )
-    
+
 # Set labels and legend
 ax.set_xlabel("SASA")
 ax.set_ylabel("Count")
-ax.legend(frameon=False, loc="upper right")
+ax.legend(frameon=False, loc="upper left")
 
 # Add a vertical dash line at x=18
 ax.axvline(x=18, color="black", linestyle="--", linewidth=2)
