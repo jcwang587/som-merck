@@ -27,10 +27,7 @@ rdDepictor.SetPreferCoordGen(True)
 from rdkit.Chem.Draw import rdMolDraw2D
 
 
-
-def create_image(
-    st, mode="C", out_dir=Path().resolve(), name="labeled"
-):
+def create_image(st, mode="C", out_dir=Path().resolve(), name="labeled"):
     """
     Create image function compatible with the Schrodinger python
     Modes: C, N, and S
@@ -130,7 +127,12 @@ def create_risk_scale_png(
 class CoxidesAnalysis:
 
     def __init__(
-        self, dir_report: Path, path_structure: Path, title: str, medium_coff: float, high_coff: float
+        self,
+        dir_report: Path,
+        path_structure: Path,
+        title: str,
+        medium_coff: float,
+        high_coff: float,
     ):
         self.dir_report = dir_report
         self.path_structure = path_structure
@@ -142,36 +144,41 @@ class CoxidesAnalysis:
         self.basis = "6-31G(d,p)"
 
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
-        self.img = create_image(self.structure, mode='C', name=f"{self.dir_report}/{self.title}")
+        self.img = create_image(
+            self.structure, mode="C", name=f"{self.dir_report}/{self.title}"
+        )
 
         # Give a fake data
         self.data = self.GenerateDataList()
 
     def GenerateDataList(self):
-        ''' 
-        Take information from self.structure to create a Data list for report 
+        """
+        Take information from self.structure to create a Data list for report
         generation
-        '''
-        
-        print('Creating Reports...')
-        print('Generating BDE table data...')
-        data = [['Atom', 'BDE (kcal/mol)', 'Propensity']]
-        
+        """
+
+        print("Creating Reports...")
+        print("Generating BDE table data...")
+        data = [["Atom", "BDE (kcal/mol)", "Propensity"]]
+
         for atom in self.structure.atom:
             try:
-                bde = float(atom.property['r_user_CH-BDE']) 
+                bde = float(atom.property["r_user_CH-BDE"])
                 if bde < self.high_coff:
-                    propensity = 'High'
+                    propensity = "High"
                 if bde <= self.medium_coff and bde >= self.high_coff:
-                    propensity = 'Moderate'                    
+                    propensity = "Moderate"
                 if bde > self.medium_coff:
-                    propensity = 'Low'
-                row = [str(atom.element) + str(atom.index), 
-                str(atom.property['r_user_CH-BDE']), propensity]
+                    propensity = "Low"
+                row = [
+                    str(atom.element) + str(atom.index),
+                    str(atom.property["r_user_CH-BDE"]),
+                    propensity,
+                ]
                 data.append(row)
             except KeyError:
                 pass
-        
+
         return data
 
     def CreatePDFReport(self):
@@ -279,7 +286,11 @@ if __name__ == "__main__":
     C_MEDIUM_COFF = 94
 
     # Generate the risk scale image
-    create_risk_scale_png(medium=C_MEDIUM_COFF, high=C_HIGH_COFF, filename=Path("./test/C-oxidation_risk_scale.png"))
+    create_risk_scale_png(
+        medium=C_MEDIUM_COFF,
+        high=C_HIGH_COFF,
+        filename=Path("./test/C-oxidation_risk_scale.png"),
+    )
 
     # mae_dir = Path("../data/qmox_mae")
     mae_dir = Path("./test")
@@ -290,11 +301,11 @@ if __name__ == "__main__":
         mae_structure = StructureReader.read(mae_file)
 
         qmox_analysis = CoxidesAnalysis(
-            dir_report=Path("./test"), 
+            dir_report=Path("./test"),
             path_structure=Path(mae_file),
             title=mae_structure.title,
-            medium_coff=C_MEDIUM_COFF, 
-            high_coff=C_HIGH_COFF
+            medium_coff=C_MEDIUM_COFF,
+            high_coff=C_HIGH_COFF,
         )
         qmox_analysis.CreatePDFReport()
 

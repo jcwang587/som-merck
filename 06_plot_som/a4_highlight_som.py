@@ -37,7 +37,6 @@ for mae_file in mae_files:
     secondary_som_atoms = []
     tertiary_som_atoms = []
 
-
     # Get PRIMARY_SOM atom indices if the value is a integer
     if mol.HasProp("i_sd_PRIMARY\_SOM"):
         primary_som = mol.GetProp("i_sd_PRIMARY\_SOM")
@@ -80,9 +79,7 @@ for mae_file in mae_files:
     svg = drawer.GetDrawingText()
 
     # Save the SVG image
-    with open(
-        f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}", "w"
-    ) as f:
+    with open(f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}", "w") as f:
         f.write(svg)
 
     cairosvg.svg2png(
