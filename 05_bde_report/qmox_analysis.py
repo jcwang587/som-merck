@@ -62,6 +62,13 @@ def create_image(
     return out_png
 
 
+def check_missing_sites(structure: StructureReader):
+    """Check if the structure has missing sites"""
+    for atom in structure.atom:
+        if atom.property.get("r_user_CH-BDE") is None:
+            print(f"Missing site: {atom.element} {atom.index}")
+
+
 def autocrop(image: str, bgcolor: str = "white"):
     im = ImagePIL.open(image)
     if im.mode != "RGB":
