@@ -19,6 +19,7 @@ from matplotlib.patches import Rectangle
 
 from PIL import Image as ImagePIL
 from PIL import ImageChops
+import cairosvg
 
 from rdkit import Chem
 from rdkit.Chem import rdDepictor
@@ -31,30 +32,34 @@ def create_image(st, mode="C", out_dir=Path().resolve(), name="labeled"):
     """
     Create image function compatible with the Schrodinger python
     Modes: C, N, and S
-    SVG format
     """
 
     molecule = adapter.to_rdkit(st)
 
-    for i, atom in enumerate(molecule.GetAtoms()):
-        if mode == atom.GetSymbol():
-            atom.SetProp("_displayLabel", f"{mode}<sub>{str(i+1)}</sub>")
+    # for i, atom in enumerate(molecule.GetAtoms()):
+    #     if mode == atom.GetSymbol():
+    #         atom.SetProp("_displayLabel", f"{mode}<sub>{str(i+1)}</sub>")
 
     molecule = Chem.RemoveHs(molecule)
 
     rdDepictor.Compute2DCoords(molecule)
-    d = rdMolDraw2D.MolDraw2DSVG(500, 500)
-    rdMolDraw2D.PrepareAndDrawMolecule(d, molecule)
-    d.DrawMolecule(molecule)
-    d.FinishDrawing()
-    svg_txt = d.GetDrawingText()
+    drawer = rdMolDraw2D.MolDraw2DSVG(1000, 600)
+
+    opts = drawer.drawOptions()
+    for i in range(molecule.GetNumAtoms()):
+        opts.atomLabels[i] = f"{molecule.GetAtomWithIdx(i).GetSymbol()}{i+1}"
+        opts.fixedFontSize = 26
+
+    drawer.DrawMolecule(molecule)
+    drawer.FinishDrawing()
+    svg = drawer.GetDrawingText()
 
     out_svg = out_dir / f"{name}.svg"
     out_png = out_dir / f"{name}.png"
     with open(out_svg, "w+") as f:
-        f.write(svg_txt)
+        f.write(svg)
 
-    os.system(f"convert -density 1200 -resize 500x500 {str(out_svg)} {str(out_png)}")
+    cairosvg.svg2png(url=str(out_svg), write_to=str(out_png))
     os.remove(out_svg)
 
     return out_png
@@ -204,7 +209,7 @@ class CoxidesAnalysis:
         styleHeading.alignment = 1
 
         # Process data
-        pil_st = Image(str(self.img), width=2.0 * inch, height=2.0 * inch)
+        pil_st = Image(str(self.img), width=4.0 * inch, height=2.4 * inch)
         pil_risk = Image(str(self.risk_scale), width=3.0 * inch, height=0.8 * inch)
 
         # Create PDF
