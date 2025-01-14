@@ -312,6 +312,8 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
             ignore_index=True,
         )
 
+raw_zaretzki_index = dataset["zaretzki_index"].unique()
+
 dataset = dataset[dataset["atomic_number"] == 6]
 dataset = dataset[dataset["is_aromatic"] == 0]
 dataset = dataset[dataset["hydrogen_neighbor"] > 0]
@@ -333,3 +335,9 @@ print(f"som ratio: {som_count / len(dataset)}")
 
 print(f"number of molecules: {len(dataset['zaretzki_index'].unique())}")
 print(f"number of sites: {len(dataset)}")
+
+clean_zaretzki_index = dataset["zaretzki_index"].unique()
+# print the molecule in the raw_zaretzki_index but not in the clean_zaretzki_index
+for molecule in raw_zaretzki_index:
+    if molecule not in clean_zaretzki_index:
+        print(molecule)
