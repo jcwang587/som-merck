@@ -1,6 +1,9 @@
 from rdkit import Chem
 from rdkit.Chem import Draw
 from rdkit.Chem import AllChem
+from rdkit.Chem.Draw import rdDepictor
+from rdkit.Chem import rdCoordGen
+
 import cairosvg
 import shutil
 
@@ -30,7 +33,11 @@ for mae_file in mae_files:
     mol = Chem.RemoveHs(mol)
 
     # Compute 2D coordinates
-    AllChem.Compute2DCoords(mol)
+    rdDepictor.SetPreferCoordGen(True)
+    rdDepictor.Compute2DCoords(mol)
+
+    # Remove chiral information
+    Chem.RemoveStereochemistry(mol)
 
     # Initialize lists for SOM atom indices
     primary_som_atoms = []
@@ -65,16 +72,24 @@ for mae_file in mae_files:
         highlight_colors[idx] = tertiary_color
 
     # Draw the molecule with highlighted atoms without bonds
-    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(500, 300)
+    mol_draw = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, addChiralHs=False)
+    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(1000, 600)
+
     opts = drawer.drawOptions()
-    for i in range(mol.GetNumAtoms()):
-        opts.atomLabels[i] = f"{mol.GetAtomWithIdx(i).GetSymbol()}{i+1}"
+
+    for i in range(mol_draw.GetNumAtoms()):
+        opts.atomLabels[i] = f"{mol_draw.GetAtomWithIdx(i).GetSymbol()}{i+1}"
+
+    drawer.drawOptions().prepareMolsBeforeDrawing = False
+    drawer.drawOptions().maxFontSize = 25
+
     drawer.DrawMolecule(
-        mol,
+        mol_draw,
         highlightAtoms=highlight_atoms,
         highlightAtomColors=highlight_colors,
         highlightBonds=[],
     )
+
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
 
@@ -86,7 +101,6 @@ for mae_file in mae_files:
         url=f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}",
         write_to=f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}",
     )
-
 
 # remove the svg folder
 shutil.rmtree("../data/svg_merck_merck")
