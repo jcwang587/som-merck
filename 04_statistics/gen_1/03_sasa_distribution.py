@@ -47,36 +47,40 @@ n, bins, patches = ax.hist(
     som_df["sasa_hydrogen_maestro"],
     bins=bins,
     label=["Experimental SOM"],
-    color=["#CC5F5A"],
-    edgecolor="black",
+    color=["#08312a"],
+    edgecolor="white",
     stacked=True,
 )
 
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
-    if height > 0:  # Only annotate if the height is greater than 0
+    if height > 0: 
         ax.annotate(
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
                 height + 1 / 25 * 14,
             ),
-            xytext=(0, 0),  # No vertical offset
+            xytext=(0, 0),  
             textcoords="offset points",
             ha="center",
             va="center",
+            fontsize=16,
         )
 
 # Set labels and legend
-ax.set_xlabel("SASA")
-ax.set_ylabel("Count")
-ax.legend(frameon=False, loc="upper left")
+ax.set_xlabel("SASA (Å²)", fontsize=18, fontweight="bold")
+ax.set_ylabel("Count", fontsize=18, fontweight="bold")
+# ax.legend(frameon=False, loc="upper left")
 
 # Add a vertical dash line at x=18
-ax.axvline(x=18, color="black", linestyle="--", linewidth=2)
+ax.axvline(x=18, color="black", linestyle="--", linewidth=3)
 ax.set_xlim(2, 36)
 ax.set_ylim(0, 14)
+
+plt.xticks(fontsize=16)
+plt.yticks(fontsize=16)
 
 plt.tight_layout()
 plt.savefig("./sasa_hydrogen_distribution_all.png")

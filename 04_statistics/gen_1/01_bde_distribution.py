@@ -43,36 +43,41 @@ n, bins, patches = ax.hist(
     som_df["bde"],
     bins=bins,
     label=["Experimental SOM"],
-    color=["#CC5F5A"],
-    edgecolor="black",
+    color=["#08312a"],
+    edgecolor="white",
     stacked=True,
 )
 
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
-    if height > 0:  # Only annotate if the height is greater than 0
+    if height > 0: 
         ax.annotate(
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
                 height + 1,
             ),
-            xytext=(0, 0),  # No vertical offset
+            xytext=(0, 0),  
             textcoords="offset points",
             ha="center",
             va="center",
+            fontsize=16,
         )
 
 # rotate the x-axis labels
-ax.set_xlabel("BDE")
-ax.set_ylabel("Count")
+ax.set_xlabel("BDE (kcal/mol)", fontsize=18, fontweight="bold")
+ax.set_ylabel("Count", fontsize=18, fontweight="bold")
+
+# Increase the font size of the tick labels
+plt.xticks(fontsize=16)
+plt.yticks(fontsize=16)
 
 # Add a vertical dash line at x=94
-ax.axvline(x=94, color="black", linestyle="--", linewidth=2)
+ax.axvline(x=94, color="black", linestyle="--", linewidth=3)
 ax.set_xlim(68, 107)
 ax.set_ylim(0, 25)
-ax.legend(frameon=False, loc="upper left")
+# ax.legend(frameon=False, loc="upper left")
 
 plt.tight_layout()
 plt.savefig("./bde_distribution_som.png")
