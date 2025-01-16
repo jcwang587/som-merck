@@ -314,6 +314,9 @@ for zaretzki_index, atomic_indices in atomic_number_dict.items():
 
 raw_zaretzki_index = dataset["zaretzki_index"].unique()
 
+dataset.to_csv("../data/dataset/dataset_merck_all.csv", index=False)
+
+
 dataset = dataset[dataset["atomic_number"] == 6]
 dataset = dataset[dataset["is_aromatic"] == 0]
 dataset = dataset[dataset["hydrogen_neighbor"] > 0]
