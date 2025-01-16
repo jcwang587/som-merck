@@ -73,7 +73,7 @@ for mae_file in mae_files:
 
     # Draw the molecule with highlighted atoms without bonds
     mol_draw = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, addChiralHs=False)
-    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(1000, 600)
+    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(1000, 1000)
 
     opts = drawer.drawOptions()
 
@@ -92,6 +92,24 @@ for mae_file in mae_files:
 
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
+
+    # Add a 1000x1000 white background at the right side of the SVG
+    svg_lines = svg.splitlines()
+    svg_end_index = svg_lines.index('</svg>')
+    svg_lines.insert(svg_end_index, '<rect x="1000" y="0" width="1000" height="1000" fill="white" />')
+
+    # Define the text to be added
+    text = "Highlighted Atoms:\nPrimary SOM: Red\nSecondary SOM: Green\nTertiary SOM: Cyan\n"
+    # Add the text to the SVG manually
+    text_svg = (
+        '<text x="1050" y="50" font-size="20" fill="black">'
+        + ''.join(f'<tspan x="1050" dy="1.2em">{line}</tspan>' for line in text.splitlines())
+        + '</text>'
+    )
+    svg_lines.insert(svg_end_index, text_svg)
+
+    # Reconstruct the SVG content
+    svg = "\n".join(svg_lines)
 
     # Save the SVG image
     with open(f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}", "w") as f:
