@@ -4,6 +4,8 @@ from rdkit.Chem import AllChem
 from rdkit.Chem.Draw import rdDepictor
 from rdkit.Chem import rdCoordGen
 
+import svgutils.transform as st
+
 import cairosvg
 import shutil
 
@@ -93,32 +95,28 @@ for mae_file in mae_files:
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
 
-    # Add a 1000x1000 white background at the right side of the SVG
-    svg_lines = svg.splitlines()
-    svg_end_index = svg_lines.index('</svg>')
-    svg_lines.insert(svg_end_index, '<rect x="1000" y="0" width="1000" height="1000" fill="white" />')
+    # expand the svg to 1000x2000, use white space to fill the right side
+    import re
+    
+    # Update both viewBox and width/height attributes
+    svg = re.sub(r'width="(\d+)"', 'width="1000"', svg)
+    svg = re.sub(r'height="(\d+)"', 'height="2000"', svg)
+    svg = re.sub(r'viewBox="([\d\.\s-]+)"', 'viewBox="0 0 2000 1000"', svg)
+    
+    # Also update the style of the root SVG element to ensure proper scaling
+    svg = svg.replace('<svg ', '<svg style="background-color: white;" ')
 
-    # Define the text to be added
-    text = "Highlighted Atoms:\nPrimary SOM: Red\nSecondary SOM: Green\nTertiary SOM: Cyan\n"
-    # Add the text to the SVG manually
-    text_svg = (
-        '<text x="1050" y="50" font-size="20" fill="black">'
-        + ''.join(f'<tspan x="1050" dy="1.2em">{line}</tspan>' for line in text.splitlines())
-        + '</text>'
-    )
-    svg_lines.insert(svg_end_index, text_svg)
+    # use svgutials to add text to the SVG
+    fig = st.fromstring(svg)
+    label = st.TextElement(text="Highlighted Atoms:\nPrimary SOM: Red\nSecondary SOM: Green\nTertiary SOM: Cyan\n", x=1000, y=50)
+    fig.append(label)
 
-    # Reconstruct the SVG content
-    svg = "\n".join(svg_lines)
+    fig.save(f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}")
 
-    # Save the SVG image
-    with open(f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}", "w") as f:
-        f.write(svg)
-
-    cairosvg.svg2png(
-        url=f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}",
-        write_to=f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}",
-    )
+    # cairosvg.svg2png(
+    #     url=f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}",
+    #     write_to=f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}",
+    # )
 
 # remove the svg folder
-shutil.rmtree("../data/svg_merck_merck")
+# shutil.rmtree("../data/svg_merck_merck")
