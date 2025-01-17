@@ -22,7 +22,7 @@ def compute_relative_values(data_dict, min_val, max_val):
 
 
 # Initialize all possible data points
-all_c_mae_dir = "../data/merck_zaretzki"
+all_c_mae_dir = "../data/merck_merck"
 all_c_mae_files = [f for f in os.listdir(all_c_mae_dir) if f.endswith(".mae")]
 all_c_mae_files.sort()
 
@@ -316,11 +316,14 @@ raw_zaretzki_index = dataset["zaretzki_index"].unique()
 
 dataset.to_csv("../data/dataset/dataset_merck_all.csv", index=False)
 
-
 dataset = dataset[dataset["atomic_number"] == 6]
 dataset = dataset[dataset["is_aromatic"] == 0]
 dataset = dataset[dataset["hydrogen_neighbor"] > 0]
 dataset = dataset[dataset["double_bonded"] == 0]
+
+dataset_som = dataset[dataset["primary_som"] == 1]
+dataset_non_som = dataset[dataset["som"] == 0]
+dataset = pd.concat([dataset_som, dataset_non_som])
 
 # Export the dataset to csv
 dataset.to_csv("../data/dataset/dataset_merck_bde.csv", index=False)
@@ -340,6 +343,7 @@ print(f"number of molecules: {len(dataset['zaretzki_index'].unique())}")
 print(f"number of sites: {len(dataset)}")
 
 clean_zaretzki_index = dataset["zaretzki_index"].unique()
+
 # print the molecule in the raw_zaretzki_index but not in the clean_zaretzki_index
 for molecule in raw_zaretzki_index:
     if molecule not in clean_zaretzki_index:
