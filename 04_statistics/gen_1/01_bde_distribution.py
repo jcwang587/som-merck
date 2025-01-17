@@ -41,6 +41,10 @@ n, bins, patches = ax.hist(
     stacked=True,
 )
 
+# Set the last bins to be light green
+for patch in patches[:-7]:
+    patch.set_facecolor('#00E47C')
+
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
@@ -49,7 +53,7 @@ for patch in patches:
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
-                height + 1,
+                height + 1 / 30 * 18,
             ),
             xytext=(0, 0),  
             textcoords="offset points",
@@ -57,6 +61,9 @@ for patch in patches:
             va="center",
             fontsize=16,
         )
+
+# Set x-axis ticks from 68 to 106 with a step of 4
+ax.set_xticks(range(70, 106, 4))
 
 # rotate the x-axis labels
 ax.set_xlabel("BDE (kcal/mol)", fontsize=18, fontweight="bold")
@@ -68,8 +75,8 @@ plt.yticks(fontsize=16)
 
 # Add a vertical dash line at x=94
 ax.axvline(x=94, color="black", linestyle="--", linewidth=3)
-ax.set_xlim(68, 107)
-ax.set_ylim(0, 25)
+ax.set_xlim(68, 106)
+ax.set_ylim(0, 18)
 # ax.legend(frameon=False, loc="upper left")
 
 plt.tight_layout()

@@ -45,6 +45,10 @@ n, bins, patches = ax.hist(
     stacked=True,
 )
 
+# Set the last bins to be light green
+for patch in patches[5:]:
+    patch.set_facecolor('#00E47C')
+
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
@@ -53,7 +57,7 @@ for patch in patches:
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
-                height + 1 / 25 * 14,
+                height + 1 / 30 * 16,
             ),
             xytext=(0, 0),  
             textcoords="offset points",
@@ -62,15 +66,22 @@ for patch in patches:
             fontsize=16,
         )
 
+
+
+# Set x-axis ticks from 68 to 106 with a step of 4
+ax.set_xticks(range(0, 36, 4))
+
 # Set labels and legend
 ax.set_xlabel("SASA (Å²)", fontsize=18, fontweight="bold")
 ax.set_ylabel("Count", fontsize=18, fontweight="bold")
 # ax.legend(frameon=False, loc="upper left")
 
-# Add a vertical dash line at x=18
-ax.axvline(x=18, color="black", linestyle="--", linewidth=3)
+# Add a vertical dash line at x=10
+ax.axvline(x=10, color="black", linestyle="--", linewidth=3)
 ax.set_xlim(2, 36)
-ax.set_ylim(0, 14)
+ax.set_ylim(0, 15)
+
+
 
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
