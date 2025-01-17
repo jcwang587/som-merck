@@ -9,6 +9,11 @@ import pygal
 import cairosvg
 import shutil
 
+from PIL import Image
+import matplotlib.pyplot as plt
+import pandas as pd
+from pandas.plotting import table
+
 from schrodinger.structure import StructureReader
 from schrodinger.rdkit.rdkit_adapter import to_rdkit
 
@@ -100,10 +105,26 @@ for mae_file in mae_files:
     with open(f"./test/{file_name.replace('.mae', '.png')}", "wb") as f:
         cairosvg.svg2png(bytestring=svg, write_to=f)
 
-    # Use pygal to add a table on the right side of the svg
-    table = pygal.Bar()
-    table.add("Highlighted Atoms", [1, 2, 3, 4, 5])
-    table.render_to_file(f"./test/table.svg")
+    # Create a DataFrame with the highlighted atoms
+    df = pd.DataFrame(highlight_atoms, columns=["Atom Index"])
+
+    # Set the figure size to 1000x1000 pixels
+    plt.figure(figsize=(10, 10))  # 10 inches by 10 inches, assuming 100 dpi
+
+    ax = plt.subplot(111, frame_on=False)
+    ax.xaxis.set_visible(False) 
+    ax.yaxis.set_visible(False) 
+
+    table(ax, df)
+    plt.savefig(f"./test/table.png", dpi=100)  # Set dpi to 100 for 1000x1000 pixels
+
+    # Combine the two images
+    image1 = Image.open(f"./test/{file_name.replace('.mae', '.png')}")
+    image2 = Image.open(f"./test/table.png")
+    combined_image = Image.new("RGB", (2000, 1000))
+    combined_image.paste(image1, (0, 0))
+    combined_image.paste(image2, (1000, 0))
+    combined_image.save(f"./test/combined.png")
 
 
 # remove the svg folder
