@@ -8,7 +8,7 @@ f_m_ct {
  s_m_title
  b_sd_chiral_flag
  s_sd_ID
- s_sd_PRIMARY\_SOM
+ i_sd_PRIMARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_st_Chirality_1
@@ -18,7 +18,7 @@ f_m_ct {
  pranidipine 
   1
   pranidipine 
-  "13 1" 
+  1 
   "Kudo et al.,Drug Metab. Disp.,27,303,1999" 
   1
   1_S_3_4_2_34 

@@ -8,7 +8,7 @@ f_m_ct {
  s_m_title
  b_sd_chiral_flag
  s_sd_ID
- s_sd_PRIMARY\_SOM
+ i_sd_PRIMARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_ff_OPLSVersion
@@ -17,7 +17,7 @@ f_m_ct {
  nifedipine 
   0
   nifedipine 
-  "7 10" 
+  7 
   "Guengerich et al.,J. Biol. Chem.,261,5051,1986" 
   1
   OPLS4 

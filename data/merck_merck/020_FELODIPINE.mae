@@ -8,7 +8,7 @@ f_m_ct {
  s_m_title
  b_sd_chiral_flag
  s_sd_ID
- s_sd_PRIMARY\_SOM
+ i_sd_PRIMARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_st_Chirality_1
@@ -18,7 +18,7 @@ f_m_ct {
  FELODIPINE 
   1
   FELODIPINE 
-  "14 1" 
+  1 
   "Walsky et al.,Drug Metab. Disp.,32,647,2004" 
   1
   1_S_2_3_4_26 

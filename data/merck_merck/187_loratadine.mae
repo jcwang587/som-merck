@@ -8,7 +8,7 @@ f_m_ct {
  s_m_title
  b_sd_chiral_flag
  s_sd_ID
- i_sd_PRIMARY\_SOM
+ s_sd_PRIMARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_ff_OPLSVersion
