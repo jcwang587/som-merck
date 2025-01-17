@@ -3,19 +3,12 @@ import pandas as pd
 
 
 # Load the dataset
-dataset = pd.read_csv("../../data/dataset/dataset_merck_all.csv")
+dataset = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
 
 dataset = dataset[dataset["bde"].notna()]
+som_df = dataset[dataset["primary_som"] == 1]
 
-primary_som_df = dataset[dataset["primary_som"] == 1]
-secondary_som_df = dataset[dataset["secondary_som"] == 1]
-tertiary_som_df = dataset[dataset["tertiary_som"] == 1]
-som_df = pd.concat([primary_som_df, secondary_som_df, tertiary_som_df])
-non_som_df = dataset[
-    (dataset["primary_som"] == 0)
-    & (dataset["secondary_som"] == 0)
-    & (dataset["tertiary_som"] == 0)
-]
+non_som_df = dataset[dataset["primary_som"] == 0]
 
 print(f"number of SOM sites: {len(som_df)}")
 print(f"number of non SOM sites: {len(non_som_df)}")
