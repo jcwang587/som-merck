@@ -5,7 +5,7 @@ from rdkit.Chem.Draw import rdDepictor
 from rdkit.Chem import rdCoordGen
 
 import svgutils.transform as st
-
+import pygal
 import cairosvg
 import shutil
 
@@ -22,7 +22,8 @@ from utils import renew_folder
 renew_folder("../data/svg_merck_merck")
 renew_folder("../data/png_merck_merck")
 
-mae_folder = "../data/merck_merck"
+# mae_folder = "../data/merck_merck"
+mae_folder = "./test"
 mae_files = glob.glob(os.path.join(mae_folder, "*.mae"))
 
 # Iterate over each molecule in the SDF file
@@ -95,28 +96,15 @@ for mae_file in mae_files:
     drawer.FinishDrawing()
     svg = drawer.GetDrawingText()
 
-    # expand the svg to 1000x2000, use white space to fill the right side
-    import re
-    
-    # Update both viewBox and width/height attributes
-    svg = re.sub(r'width="(\d+)"', 'width="1000"', svg)
-    svg = re.sub(r'height="(\d+)"', 'height="2000"', svg)
-    svg = re.sub(r'viewBox="([\d\.\s-]+)"', 'viewBox="0 0 2000 1000"', svg)
-    
-    # Also update the style of the root SVG element to ensure proper scaling
-    svg = svg.replace('<svg ', '<svg style="background-color: white;" ')
+    # save the png
+    with open(f"./test/{file_name.replace('.mae', '.png')}", "wb") as f:
+        cairosvg.svg2png(bytestring=svg, write_to=f)
 
-    # use svgutials to add text to the SVG
-    fig = st.fromstring(svg)
-    label = st.TextElement(text="Highlighted Atoms:\nPrimary SOM: Red\nSecondary SOM: Green\nTertiary SOM: Cyan\n", x=1000, y=50)
-    fig.append(label)
+    # Use pygal to add a table on the right side of the svg
+    table = pygal.Bar()
+    table.add("Highlighted Atoms", [1, 2, 3, 4, 5])
+    table.render_to_file(f"./test/table.svg")
 
-    fig.save(f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}")
-
-    # cairosvg.svg2png(
-    #     url=f"../data/svg_merck_merck/{file_name.replace('.mae', '.svg')}",
-    #     write_to=f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}",
-    # )
 
 # remove the svg folder
 # shutil.rmtree("../data/svg_merck_merck")
