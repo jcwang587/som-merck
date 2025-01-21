@@ -18,7 +18,6 @@ print(dataset.shape)
 # Define the features and target
 features = [
     "bde",
-    "relative_ir",
     "sasa_hydrogen_maestro",
     "heavy_atoms",
 ]
