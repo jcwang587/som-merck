@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Load the dataset
-dataset = pd.read_csv("../data/dataset/dataset_merck_all.csv")
+dataset = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
 
 dataset = dataset[dataset["bde"].notna()]
 
@@ -151,5 +151,5 @@ for i in range(1, 15):
 # Save the dataframe to a csv file
 df_low_bde_som = df_low_bde_som.drop_duplicates(subset="zaretzki_atomic_index")
 df_low_bde_non_som = df_low_bde_non_som.drop_duplicates(subset="zaretzki_atomic_index")
-df_low_bde_som.to_csv("../data/bins/bde_som/low_bde_som.csv", index=False)
-df_low_bde_non_som.to_csv("../data/bins/bde_som/low_bde_non_som.csv", index=False)
+df_low_bde_som.to_csv("../../data/bins/bde_som/low_bde_som.csv", index=False)
+df_low_bde_non_som.to_csv("../../data/bins/bde_som/low_bde_non_som.csv", index=False)

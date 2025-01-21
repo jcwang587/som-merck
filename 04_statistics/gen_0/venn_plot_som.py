@@ -5,10 +5,10 @@ import pandas as pd
 
 
 # Load the data
-all_data = pd.read_csv("../data/dataset/dataset_merck_all.csv")
-bde_som = pd.read_csv("../data/bins/bde_som/low_bde_som.csv")
-relative_ir_som = pd.read_csv("../data/bins/relative_ir_som/high_relative_ir_som.csv")
-sasa_som = pd.read_csv("../data/bins/sasa_som/high_sasa_maestro_som.csv")
+all_data = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
+bde_som = pd.read_csv("../../data/bins/bde_som/low_bde_som.csv")
+relative_ir_som = pd.read_csv("../../data/bins/relative_ir_som/high_relative_ir_som.csv")
+sasa_som = pd.read_csv("../../data/bins/sasa_som/high_sasa_maestro_som.csv")
 
 print(len(bde_som))
 print(len(relative_ir_som))
@@ -23,7 +23,7 @@ v = venn3(
         set(relative_ir_som["zaretzki_atomic_index"]),
         set(sasa_som["zaretzki_atomic_index"]),
     ],
-    ["Low BDE", "High Relative IR", "High SASA"],
+    ["Low BDE\n(<94 kcal/mol)", "High Relative IR\n(>0.5)", "High SASA (> Å2)"],
     layout_algorithm=matplotlib_venn.layout.venn3.DefaultLayoutAlgorithm(
         fixed_subset_sizes=(1, 1, 1, 1, 1, 1, 1)
     ),

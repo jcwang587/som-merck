@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Load the dataset
-dataset = pd.read_csv("../data/dataset/dataset_merck_all.csv")
+dataset = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
 
 dataset = dataset[dataset["bde"].notna()]
 
@@ -163,10 +163,10 @@ df_high_sasa_maestro_non_som = df_high_sasa_maestro_non_som.drop_duplicates(
     subset="zaretzki_atomic_index"
 )
 df_high_sasa_maestro_som.to_csv(
-    "../data/bins/sasa_som/high_sasa_maestro_som.csv", index=False
+    "../../data/bins/sasa_som/high_sasa_maestro_som.csv", index=False
 )
 df_high_sasa_maestro_non_som.to_csv(
-    "../data/bins/sasa_som/high_sasa_maestro_non_som.csv", index=False
+    "../../data/bins/sasa_som/high_sasa_maestro_non_som.csv", index=False
 )
 
 # Get the average sasa
