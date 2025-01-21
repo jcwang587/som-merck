@@ -23,7 +23,7 @@ v = venn3(
         set(relative_ir_som["zaretzki_atomic_index"]),
         set(sasa_som["zaretzki_atomic_index"]),
     ],
-    ["Low BDE\n(<94 kcal/mol)", "High Relative IR\n(>0.5)", "High SASA (> Å2)"],
+    ["Low BDE\n(<94 kcal/mol)", "High Relative IR\n(>0.5)", "High SASA (>10 Å²)"],
     layout_algorithm=matplotlib_venn.layout.venn3.DefaultLayoutAlgorithm(
         fixed_subset_sizes=(1, 1, 1, 1, 1, 1, 1)
     ),
@@ -64,14 +64,14 @@ unique_index = (
 
 
 # Add text at the right bottom of the plot
-plt.text(
-    0.7,
-    0.2,
-    f"Others: 2",
-    fontsize=24,
-    fontweight="bold",
-    transform=plt.gcf().transFigure,
-)
+# plt.text(
+#     0.7,
+#     0.2,
+#     f"Others: 2",
+#     fontsize=24,
+#     fontweight="bold",
+#     transform=plt.gcf().transFigure,
+# )
 
 
 plt.savefig("./venn_plot_som.png", dpi=300, bbox_inches="tight")

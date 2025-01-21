@@ -119,7 +119,7 @@ df_high_sasa_maestro_non_som = pd.DataFrame(
     ]
 )
 
-for i in range(9, 20):
+for i in range(5, 20):
     df_high_sasa_maestro_som = pd.concat(
         [
             df_high_sasa_maestro_som,
