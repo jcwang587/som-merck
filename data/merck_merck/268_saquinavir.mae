@@ -8,7 +8,7 @@ f_m_ct {
  s_m_title
  b_sd_chiral_flag
  s_sd_ID
- i_sd_PRIMARY\_SOM
+ s_sd_PRIMARY\_SOM
  s_sd_Citation
  i_sd_New\_Or\_Updated\_From\_Original\_Merck\_Dataset
  s_st_Chirality_1
@@ -23,7 +23,7 @@ f_m_ct {
  saquinavir 
   1
   saquinavir 
-  12
+  "21 22 23"
   "Fitzsimmons and Collins,Drug Metab. Disp.,25,256,1997" 
   0
   2_S_1_6_5_50 

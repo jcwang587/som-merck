@@ -84,7 +84,7 @@ plt.savefig("./bde_distribution_som.png")
 plt.close()
 
 # Determine the last bin range
-last_bin_range = pd.Interval(bins[-8], bins[-7], closed='right')
+last_bin_range = pd.Interval(bins[-7], bins[-6], closed='right')
 print(last_bin_range)
 
 # Filter the som_df for entries in the last bin

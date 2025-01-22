@@ -9,6 +9,7 @@ import shutil
 
 from schrodinger.structure import StructureReader
 from schrodinger.rdkit.rdkit_adapter import to_rdkit
+from PIL import Image
 
 import sys
 import glob
@@ -81,7 +82,7 @@ for mae_file in mae_files:
         opts.atomLabels[i] = f"{mol_draw.GetAtomWithIdx(i).GetSymbol()}{i+1}"
 
     drawer.drawOptions().prepareMolsBeforeDrawing = False
-    drawer.drawOptions().maxFontSize = 25
+    drawer.drawOptions().maxFontSize = 30
 
     drawer.DrawMolecule(
         mol_draw,
@@ -102,5 +103,27 @@ for mae_file in mae_files:
         write_to=f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}",
     )
 
+    # Open the PNG image
+    img = Image.open(f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}").convert("RGBA")
+
+    # Make white areas transparent
+    datas = img.getdata()
+    new_data = []
+    for item in datas:
+        # Change all white (also shades of whites)
+        # pixels to transparent
+        if item[0] > 200 and item[1] > 200 and item[2] > 200:
+            new_data.append((255, 255, 255, 0))
+        else:
+            new_data.append(item)
+
+    img.putdata(new_data)
+
+    img_cropped = img.crop(img.getbbox())
+
+    # Save the resized image with transparency
+    img_cropped.save(f"../data/png_merck_merck/{file_name.replace('.mae', '.png')}", "PNG")
+
+
 # remove the svg folder
-# shutil.rmtree("../data/svg_merck_merck")
+shutil.rmtree("../data/svg_merck_merck")
