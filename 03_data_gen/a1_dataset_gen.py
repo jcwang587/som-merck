@@ -122,17 +122,28 @@ for mae_file in sasa_hydrogen_maestro_files:
                         bond.atom1 if bond.atom1.element == "H" else bond.atom2
                     )
 
-            hydrogen_sasa = 0
+            hydrogen_sasa_sum = 0
+            hydrogen_sasa_list = []
             # Get the SASA of the hydrogen atoms
             for hydrogen_atom in hydrogen_atoms:
                 if "r_user_sasa" in hydrogen_atom.property:
-                    hydrogen_sasa += hydrogen_atom.property["r_user_sasa"]
+                    hydrogen_sasa_sum += hydrogen_atom.property["r_user_sasa"]
+                    hydrogen_sasa_list.append(hydrogen_atom.property["r_user_sasa"])
 
+            # Apply the average value
             hydrogen_sasa = (
-                hydrogen_sasa / len(hydrogen_atoms)
+                hydrogen_sasa_sum / len(hydrogen_atoms)
                 if len(hydrogen_atoms) > 0
                 else pd.NA
             )
+
+            # Apply the maximum value
+            # hydrogen_sasa = (
+            #     max(hydrogen_sasa_list)
+            #     if len(hydrogen_atoms) > 0
+            #     else pd.NA
+            # )
+
             sasa_hydrogen_maestro_dict[mae_file_index][atom.index] = hydrogen_sasa
 
 

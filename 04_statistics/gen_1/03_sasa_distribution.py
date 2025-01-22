@@ -89,3 +89,16 @@ plt.yticks(fontsize=16)
 plt.tight_layout()
 plt.savefig("./sasa_hydrogen_distribution_all.png")
 plt.close()
+
+# Determine the last bin range
+last_bin_range = pd.Interval(bins[3], bins[4], closed='right')
+print(last_bin_range)
+
+# Filter the som_df for entries in the last bin
+last_bin_entries = som_df[som_df["sasa_hydrogen_maestro"].apply(lambda x: x in last_bin_range)]
+
+# Print the Zaretzki index of the entries in the last bin
+print("Zaretzki index of the last bin:")
+print(last_bin_entries["zaretzki_index"])
+print(last_bin_entries["atomic_index"])  
+print(last_bin_entries["bde"])
