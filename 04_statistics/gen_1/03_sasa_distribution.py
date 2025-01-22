@@ -79,9 +79,7 @@ ax.set_ylabel("Count", fontsize=18, fontweight="bold")
 # Add a vertical dash line at x=10
 ax.axvline(x=10, color="black", linestyle="--", linewidth=3)
 ax.set_xlim(2, 36)
-ax.set_ylim(0, 15)
-
-
+ax.set_ylim(0, 14)
 
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
