@@ -92,5 +92,8 @@ last_bin_entries = som_df[som_df["bde"].apply(lambda x: x in last_bin_range)]
 
 # Print the Zaretzki index of the entries in the last bin
 print("Zaretzki index of the last bin:")
-print(last_bin_entries["zaretzki_index"])
+print(last_bin_entries["molecule_title"])
 print(last_bin_entries["atomic_index"])  
+
+print(last_bin_entries["bde"])
+print(last_bin_entries["sasa_hydrogen_maestro"])
