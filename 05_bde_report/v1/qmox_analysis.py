@@ -27,40 +27,19 @@ from rdkit.Chem import rdDepictor
 rdDepictor.SetPreferCoordGen(True)
 from rdkit.Chem.Draw import rdMolDraw2D
 
+from utils import draw_molecule
 
-def create_image(st, mode="C", out_dir=Path().resolve(), name="labeled"):
+
+def create_image(st, out_dir=Path().resolve(), name="labeled"):
     """
     Create image function compatible with the Schrodinger python
-    Modes: C, N, and S
     """
 
-    molecule = adapter.to_rdkit(st)
+    draw_molecule(st, name)
 
-    # for i, atom in enumerate(molecule.GetAtoms()):
-    #     if mode == atom.GetSymbol():
-    #         atom.SetProp("_displayLabel", f"{mode}<sub>{str(i+1)}</sub>")
 
-    molecule = Chem.RemoveHs(molecule)
-
-    rdDepictor.Compute2DCoords(molecule)
-    drawer = rdMolDraw2D.MolDraw2DSVG(1000, 600)
-
-    opts = drawer.drawOptions()
-    for i in range(molecule.GetNumAtoms()):
-        opts.atomLabels[i] = f"{molecule.GetAtomWithIdx(i).GetSymbol()}{i+1}"
-        opts.fixedFontSize = 26
-
-    drawer.DrawMolecule(molecule)
-    drawer.FinishDrawing()
-    svg = drawer.GetDrawingText()
-
-    out_svg = out_dir / f"{name}.svg"
     out_png = out_dir / f"{name}.png"
-    with open(out_svg, "w+") as f:
-        f.write(svg)
 
-    cairosvg.svg2png(url=str(out_svg), write_to=str(out_png))
-    os.remove(out_svg)
 
     return out_png
 
@@ -150,7 +129,7 @@ class CoxidesAnalysis:
 
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
         self.img = create_image(
-            self.structure, mode="C", name=f"{self.dir_report}/{self.title}"
+            self.structure, name=f"{self.dir_report}/{self.title}"
         )
 
         # Give a fake data
@@ -164,7 +143,7 @@ class CoxidesAnalysis:
 
         print("Creating Reports...")
         print("Generating BDE table data...")
-        data = [["Atom", "BDE (kcal/mol)", "Propensity"]]
+        data = [["Atom", "BDE (kcal/mol)", "BDE Risk", "SASA (Å²)"]]
 
         for atom in self.structure.atom:
             try:
@@ -179,6 +158,7 @@ class CoxidesAnalysis:
                     str(atom.element) + str(atom.index),
                     str(atom.property["r_user_CH-BDE"]),
                     propensity,
+                    str(atom.property["r_user_CH-SASA"]),
                 ]
                 data.append(row)
             except KeyError:
@@ -209,7 +189,7 @@ class CoxidesAnalysis:
         styleHeading.alignment = 1
 
         # Process data
-        pil_st = Image(str(self.img), width=4.0 * inch, height=2.4 * inch)
+        pil_st = Image(str(self.img), width=4.0 * inch, height=3.6 * inch)
         pil_risk = Image(str(self.risk_scale), width=3.0 * inch, height=0.8 * inch)
 
         # Create PDF
