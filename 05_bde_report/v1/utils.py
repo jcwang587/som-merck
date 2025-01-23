@@ -26,9 +26,14 @@ def draw_molecule(structure: StructureReader, name="labeled"):
     # Remove chiral information
     Chem.RemoveStereochemistry(mol)
 
+    # Calculate the size based on the number of heavy atoms
+    num_atoms = mol.GetNumHeavyAtoms()
+    print(f"Number of heavy atoms: {num_atoms}")
+    size = max(300, num_atoms * 30)  # Adjust the multiplier as needed
+
     # Draw the molecule with highlighted atoms without bonds
     mol_draw = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, addChiralHs=False)
-    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(1000, 1000)
+    drawer = Draw.rdMolDraw2D.MolDraw2DSVG(size, size)  # Use calculated size
 
     opts = drawer.drawOptions()
 
