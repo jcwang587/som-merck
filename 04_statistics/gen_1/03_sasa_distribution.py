@@ -89,7 +89,7 @@ plt.savefig("./sasa_hydrogen_distribution_all.png")
 plt.close()
 
 # Determine the last bin range
-last_bin_range = pd.Interval(bins[3], bins[4], closed='right')
+last_bin_range = pd.Interval(bins[4], bins[5], closed='right')
 print(last_bin_range)
 
 # Filter the som_df for entries in the last bin
