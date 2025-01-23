@@ -79,7 +79,7 @@ for mae_file in mae_files:
     opts = drawer.drawOptions()
 
     for i in range(mol_draw.GetNumAtoms()):
-        opts.atomLabels[i] = f"{mol_draw.GetAtomWithIdx(i).GetSymbol()}{i+1}"
+        opts.atomLabels[i] = f"{mol_draw.GetAtomWithIdx(i).GetSymbol()}<sub>{i+1}</sub>"
 
     drawer.drawOptions().prepareMolsBeforeDrawing = False
     drawer.drawOptions().maxFontSize = 30
