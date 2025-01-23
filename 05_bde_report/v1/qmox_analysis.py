@@ -211,7 +211,12 @@ class CoxidesAnalysis:
         styleHeading.alignment = 1
 
         # Process data
-        pil_st = Image(str(self.img), width=4.0 * inch, height=3.6 * inch)
+        # Get the image size
+        pil_image = ImagePIL.open(self.img)
+        image_size = pil_image.size
+        print(f"Image size: {image_size}")
+
+        pil_st = Image(str(self.img), width=image_size[0] / 200 * inch, height=image_size[1] / 200 * inch)
         pil_risk = Image(str(self.risk_scale), width=3.0 * inch, height=0.8 * inch)
 
         # Create PDF
@@ -292,7 +297,7 @@ if __name__ == "__main__":
     C_HIGH_COFF = 88
     C_MEDIUM_COFF = 94
 
-    mae_dir = Path("./test")
+    mae_dir = Path("./test2_no_sasa")
     mae_files = mae_dir.glob("*.mae")
 
     # Generate the risk scale image
