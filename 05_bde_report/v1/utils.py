@@ -3,7 +3,7 @@ from rdkit.Chem import Draw
 from rdkit.Chem import AllChem
 from rdkit.Chem.Draw import rdDepictor
 from rdkit.Chem import rdCoordGen
-
+import os
 import cairosvg
 
 from schrodinger.structure import StructureReader
@@ -70,3 +70,6 @@ def draw_molecule(structure: StructureReader, name="labeled"):
 
     # Save the resized image with transparency
     img_cropped.save(f"{name}.png")
+
+    # Remove the SVG file
+    os.remove(f"{name}.svg")

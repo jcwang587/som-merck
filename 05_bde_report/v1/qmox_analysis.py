@@ -143,7 +143,7 @@ class CoxidesAnalysis:
 
         print("Creating Reports...")
         print("Generating BDE table data...")
-        data = [["Atom", "BDE (kcal/mol)", "BDE Risk", "SASA (Å²)"]]
+        data = [["Atom", "BDE (kcal/mol)", "BDE Risk"]]
 
         for atom in self.structure.atom:
             try:
@@ -158,11 +158,33 @@ class CoxidesAnalysis:
                     str(atom.element) + str(atom.index),
                     str(atom.property["r_user_CH-BDE"]),
                     propensity,
-                    str(atom.property["r_user_CH-SASA"]),
                 ]
                 data.append(row)
             except KeyError:
                 pass
+        
+        # Check if SASA property is available
+        if "r_user_CH-SASA" in self.structure.atom[1].property:
+            data = [["Atom", "BDE (kcal/mol)", "BDE Risk", "SASA (Å²)"]]
+            # add SASA for each row in data
+            for atom in self.structure.atom:
+                try:
+                    bde = float(atom.property["r_user_CH-BDE"])
+                    if bde < self.high_coff:
+                        propensity = "High"
+                    if bde <= self.medium_coff and bde >= self.high_coff:
+                        propensity = "Moderate"
+                    if bde > self.medium_coff:
+                        propensity = "Low"
+                    row = [
+                        str(atom.element) + str(atom.index),
+                        str(atom.property["r_user_CH-BDE"]),
+                        propensity,
+                        str(atom.property["r_user_CH-SASA"]),
+                    ]
+                    data.append(row)
+                except KeyError:
+                    pass
 
         return data
 
@@ -270,23 +292,22 @@ if __name__ == "__main__":
     C_HIGH_COFF = 88
     C_MEDIUM_COFF = 94
 
+    mae_dir = Path("./test")
+    mae_files = mae_dir.glob("*.mae")
+
     # Generate the risk scale image
     create_risk_scale_png(
         medium=C_MEDIUM_COFF,
         high=C_HIGH_COFF,
-        filename=Path("./test/C-oxidation_risk_scale.png"),
+        filename=mae_dir / "C-oxidation_risk_scale.png",
     )
-
-    # mae_dir = Path("../data/qmox_mae")
-    mae_dir = Path("./test")
-    mae_files = mae_dir.glob("*.mae")
 
     # Generate the pdf report using the CoxidesAnalysis
     for mae_file in mae_files:
         mae_structure = StructureReader.read(mae_file)
 
         qmox_analysis = CoxidesAnalysis(
-            dir_report=Path("./test"),
+            dir_report=mae_dir,
             path_structure=Path(mae_file),
             title=mae_structure.title,
             medium_coff=C_MEDIUM_COFF,
@@ -295,4 +316,4 @@ if __name__ == "__main__":
         qmox_analysis.CreatePDFReport()
 
     # Remove the risk scale image
-    os.remove(Path("./test/C-oxidation_risk_scale.png"))
+    os.remove(mae_dir / "C-oxidation_risk_scale.png")
