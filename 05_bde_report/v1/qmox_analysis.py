@@ -5,7 +5,7 @@ warnings.filterwarnings("ignore")
 
 
 from schrodinger.structure import StructureReader
-from schrodinger import adapter
+from schrodinger.structutils import build
 
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.pagesizes import letter
@@ -19,13 +19,9 @@ from matplotlib.patches import Rectangle
 
 from PIL import Image as ImagePIL
 from PIL import ImageChops
-import cairosvg
 
-from rdkit import Chem
 from rdkit.Chem import rdDepictor
-
 rdDepictor.SetPreferCoordGen(True)
-from rdkit.Chem.Draw import rdMolDraw2D
 
 from utils import draw_molecule
 
@@ -36,7 +32,6 @@ def create_image(st, out_dir=Path().resolve(), name="labeled"):
     """
 
     draw_molecule(st, name)
-
     out_png = out_dir / f"{name}.png"
 
     return out_png
@@ -121,14 +116,41 @@ class CoxidesAnalysis:
         self.title = title
         self.medium_coff = medium_coff
         self.high_coff = high_coff
-        self.structure = StructureReader.read(self.path_structure)
+
+        structure = StructureReader.read(self.path_structure)
+        build.add_hydrogens(structure)
+        self.structure = structure
+        
         self.dft = "B3LYP"
         self.basis = "6-31G(d,p)"
-
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
         self.img = create_image(self.structure, name=f"{self.dir_report}/{self.title}")
-
         self.data = self.GenerateDataList()
+        self.missing_sites = self.MissingSites()
+
+
+    def MissingSites(self):
+        """Check if the structure has missing sites"""
+
+        # Get all the carbon atoms
+        carbons = [atom for atom in self.structure.atom if atom.element == "C"]
+
+        # Get the carbon atoms with no hydrogen atoms
+        no_hydrogen_carbons = [
+            atom for atom in carbons if any(neighbor.element == "H" for neighbor in atom.bonded_atoms)
+        ]
+
+        missing_sites = []
+        for atom in no_hydrogen_carbons:
+            if atom.property.get("r_user_CH-BDE") is None:
+                missing_sites.append(f"{atom.element}{atom.index}, ")
+        
+        # Change the last comma to a period
+        missing_sites[-1] = missing_sites[-1].replace(",", ".")
+
+        return missing_sites
+
+
 
     def GenerateDataList(self):
         """
@@ -136,9 +158,8 @@ class CoxidesAnalysis:
         generation
         """
 
-        print("Creating Reports...")
-        print("Generating BDE table data...")
-        data = [["Atom", "BDE (kcal/mol)", "BDE Risk"]]
+        print(f"Creating Reports for {self.title}")
+        data = [["Atom", "BDE (kcal/mol)", "Propensity"]]
 
         for atom in self.structure.atom:
             try:
@@ -160,7 +181,7 @@ class CoxidesAnalysis:
 
         # Check if SASA property is available
         if "r_user_CH-SASA" in self.structure.atom[1].property:
-            data = [["Atom", "BDE (kcal/mol)", "BDE Risk", "SASA (Å²)"]]
+            data = [["Atom", "BDE (kcal/mol)", "Propensity", "SASA (Å²)"]]
             for atom in self.structure.atom:
                 try:
                     bde = float(atom.property["r_user_CH-BDE"])
@@ -185,7 +206,6 @@ class CoxidesAnalysis:
     def CreatePDFReport(self):
         """Create pdf report from a data dictionary and structural image"""
         # Define style
-
         style = TableStyle(
             [
                 ("ALIGN", (0, 0), (-1, -1), "CENTER"),
@@ -196,19 +216,18 @@ class CoxidesAnalysis:
                 ("GRID", (0, 1), (-1, -1), 2, colors.black),
             ]
         )
-        # Get other styles
 
+        # Get other styles
         styles = getSampleStyleSheet()
         styleNormal = styles["Normal"]
         styleHeading = styles["Heading1"]
         styleHeading2 = styles["Heading2"]
+        styleHeading3 = styles["Heading3"]
         styleHeading.alignment = 1
 
         # Process data
-        # Get the image size
         pil_image = ImagePIL.open(self.img)
         image_size = pil_image.size
-        print(f"Image size: {image_size}")
 
         pil_st = Image(
             str(self.img),
@@ -227,19 +246,18 @@ class CoxidesAnalysis:
         story.append(Spacer(inch, 0.25 * inch))
         story.append(
             Paragraph(
-                "This report covers the results for BDE calculations"
-                f" performed for: {self.title}. Oxidation propensity is established using "
-                "C-H Bond Dissociation Enthalpies (BDE). The lower the C-H BDE values the "
-                "higher the propensity for C-oxidation. Details for the DFT calculations and"
-                " overall workflow are explained at the end of this document",
+                "This report covers the results for bond dissociation enthalpies (BDE) and "
+                f"solvent accessible surface area (SASA) calculations performed for {self.title}. "
+                "Oxidation propensity is established using C-H BDE. The lower the C-H BDE values the "
+                "higher the propensity for C-oxidation. Details for the density functional theory (DFT) "
+                "calculations and overall workflow are explained at the end of this document.",
                 styleNormal,
             )
         )
-        story.append(Spacer(inch, 0.05 * inch))
 
         # Append molecule picture
-
-        story.append(Paragraph("Bond Dissociation Energies (kcal/mol)", styleHeading2))
+        story.append(Paragraph("BDE and SASA", styleHeading2))
+        story.append(Spacer(inch, 0.15 * inch))
         story.append(pil_st)
         story.append(Spacer(inch, 0.25 * inch))
 
@@ -247,29 +265,29 @@ class CoxidesAnalysis:
         main_table = Table(self.data, colWidths=85, rowHeights=18)
         main_table.setStyle(style)
         story.append(main_table)
-        story.append(Spacer(inch, 0.15 * inch))
+
+        # Append missing sites
+        if isinstance(self.missing_sites, list):
+            story.append(Paragraph("Missing Sites:", styleHeading3))
+
+            self.missing_sites = "\n".join(self.missing_sites) 
+            story.append(Paragraph(self.missing_sites, styleNormal))
 
         # Risk scale
-        story.append(Paragraph("Risk Scale:", styleNormal))
+        story.append(Paragraph("Risk Scale:", styleHeading3))
         story.append(pil_risk)
-        story.append(Spacer(inch, 0.25 * inch))
 
-        # Append final details
-        story.append(Paragraph("Calculation details and output files", styleHeading2))
-        story.append(Spacer(inch, 0.15 * inch))
-
-        # story.append(Paragraph(f'Report files are available in: {str(self.dir_report)}',
-        # styleNormal))
-        story.append(Spacer(inch, 0.1 * inch))
+        # Append calculation details
+        story.append(Paragraph("Calculation Details", styleHeading2))
         story.append(
             Paragraph(
-                "Conformational search calculations were performed only"
-                " for the base ground state molecule. The lowest energy conformer was selected"
-                " to generate radicals and run optimization DFT calculations. DFT calculations"
-                f" were performed using Gaussian with {self.dft} level of theory and {self.basis}"
-                " basis set. The BDE protocol was adapted from: <i>Lienard, P., Gavartin, J.,"
-                " Boccardi, G., & Meunier, M. (2015). Predicting drug substances autoxidation."
-                " Pharmaceutical research, 32, 300-310.</i>",
+                "Conformational search calculations were performed only "
+                "for the base ground state molecule. The lowest energy conformer was selected "
+                "to generate radicals and run optimization DFT calculations. DFT calculations "
+                f"were performed using Gaussian with {self.dft} level of theory and {self.basis} "
+                "basis set. The BDE protocol was adapted from: <i>Lienard, P., Gavartin, J., "
+                "Boccardi, G., & Meunier, M. (2015). Predicting drug substances autoxidation. "
+                "Pharmaceutical research, 32, 300-310.</i>",
                 styleNormal,
             )
         )
