@@ -10,17 +10,19 @@ data_bde.to_csv('./dataset_merck_bde_rank.csv', index=False)
 # Get the total number of som
 som_count = data_bde[data_bde['som'] == 1].shape[0]
 
-# Count the number of data points where som is 1 and bde_rank is 1, 2, or 3
-top_1_count = data_bde[(data_bde['som'] == 1) & (data_bde['bde_rank'] == 1)].shape[0]
-top_2_count = data_bde[(data_bde['som'] == 1) & (data_bde['bde_rank'] == 2)].shape[0]
-top_3_count = data_bde[(data_bde['som'] == 1) & (data_bde['bde_rank'] == 3)].shape[0]
-top_4_count = data_bde[(data_bde['som'] == 1) & (data_bde['bde_rank'] == 4)].shape[0]
-top_5_count = data_bde[(data_bde['som'] == 1) & (data_bde['bde_rank'] == 5)].shape[0]
+# Initialize counters
+top_counts = {1: 0, 2: 0, 3: 0, 4: 0, 5: 0}
 
+# Group by 'zaretzki_index' and iterate over each group
+for _, group in data_bde.groupby('zaretzki_index'):
+    # Check for the first occurrence of 'som' in the top 5 ranks
+    for rank in range(1, 6):
+        if any((group['som'] == 1) & (group['bde_rank'] == rank)):
+            top_counts[rank] += 1
+            break  # Stop counting further for this molecule
+
+# Print the results
 print(f"som count: {som_count}")
-print(f"Top 1 count: {top_1_count}")
-print(f"Top 2 count: {top_2_count}")
-print(f"Top 3 count: {top_3_count}")
-print(f"Top 4 count: {top_4_count}")
-print(f"Top 5 count: {top_5_count}")
+for rank in range(1, 6):
+    print(f"Top {rank} count: {top_counts[rank]}")
 
