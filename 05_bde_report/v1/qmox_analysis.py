@@ -37,9 +37,7 @@ def create_image(st, out_dir=Path().resolve(), name="labeled"):
 
     draw_molecule(st, name)
 
-
     out_png = out_dir / f"{name}.png"
-
 
     return out_png
 
@@ -128,11 +126,8 @@ class CoxidesAnalysis:
         self.basis = "6-31G(d,p)"
 
         self.risk_scale = self.dir_report / "C-oxidation_risk_scale.png"
-        self.img = create_image(
-            self.structure, name=f"{self.dir_report}/{self.title}"
-        )
+        self.img = create_image(self.structure, name=f"{self.dir_report}/{self.title}")
 
-        # Give a fake data
         self.data = self.GenerateDataList()
 
     def GenerateDataList(self):
@@ -162,11 +157,10 @@ class CoxidesAnalysis:
                 data.append(row)
             except KeyError:
                 pass
-        
+
         # Check if SASA property is available
         if "r_user_CH-SASA" in self.structure.atom[1].property:
             data = [["Atom", "BDE (kcal/mol)", "BDE Risk", "SASA (Å²)"]]
-            # add SASA for each row in data
             for atom in self.structure.atom:
                 try:
                     bde = float(atom.property["r_user_CH-BDE"])
@@ -216,7 +210,11 @@ class CoxidesAnalysis:
         image_size = pil_image.size
         print(f"Image size: {image_size}")
 
-        pil_st = Image(str(self.img), width=image_size[0] / 200 * inch, height=image_size[1] / 200 * inch)
+        pil_st = Image(
+            str(self.img),
+            width=image_size[0] / 200 * inch,
+            height=image_size[1] / 200 * inch,
+        )
         pil_risk = Image(str(self.risk_scale), width=3.0 * inch, height=0.8 * inch)
 
         # Create PDF
@@ -297,7 +295,7 @@ if __name__ == "__main__":
     C_HIGH_COFF = 88
     C_MEDIUM_COFF = 94
 
-    mae_dir = Path("./test2_no_sasa")
+    mae_dir = Path("./test")
     mae_files = mae_dir.glob("*.mae")
 
     # Generate the risk scale image

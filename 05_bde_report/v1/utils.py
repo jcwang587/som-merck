@@ -11,7 +11,6 @@ from schrodinger.rdkit.rdkit_adapter import to_rdkit
 from PIL import Image
 
 
-
 def draw_molecule(structure: StructureReader, name="labeled"):
 
     mol = to_rdkit(structure)
@@ -29,7 +28,7 @@ def draw_molecule(structure: StructureReader, name="labeled"):
     # Calculate the size based on the number of heavy atoms
     num_atoms = mol.GetNumHeavyAtoms()
     print(f"Number of heavy atoms: {num_atoms}")
-    size = max(300, num_atoms * 30)  # Adjust the multiplier as needed
+    size = min(1000, num_atoms * 30)  # Adjust the multiplier as needed
 
     # Draw the molecule with highlighted atoms without bonds
     mol_draw = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, addChiralHs=False)
