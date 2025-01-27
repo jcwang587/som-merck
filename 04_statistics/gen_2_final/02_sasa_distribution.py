@@ -72,7 +72,7 @@ for patch in patches:
 ax.set_xticks(range(0, 36, 4))
 
 # Set labels and legend
-ax.set_xlabel("SASA (Angstrom²)", fontsize=18, fontweight="bold")
+ax.set_xlabel("SASA (angstrom²)", fontsize=18, fontweight="bold")
 ax.set_ylabel("Number of Sites", fontsize=18, fontweight="bold")
 # ax.legend(frameon=False, loc="upper left")
 
