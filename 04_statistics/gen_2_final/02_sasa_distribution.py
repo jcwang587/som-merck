@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Load the dataset
-dataset = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
+dataset = pd.read_csv("../../data/dataset/dataset_merck_all.csv")
 
 dataset = dataset[dataset["bde"].notna()]
 
@@ -14,9 +14,9 @@ print(f"number of SOM sites: {len(som_df)}")
 print(f"number of non SOM sites: {len(non_som_df)}")
 
 sasa_maestro_min = 0
-sasa_maestro_max = 40
+sasa_maestro_max = 36
 bins = [
-    sasa_maestro_min + i * (sasa_maestro_max - sasa_maestro_min) / 20 for i in range(21)
+    sasa_maestro_min + i * (sasa_maestro_max - sasa_maestro_min) / 18 for i in range(19)
 ]
 
 som_sasa = (
@@ -33,7 +33,7 @@ total_sasa = som_sasa + non_som_sasa
 
 # Create the histogram for reactivity
 plt.rcParams["font.size"] = 14
-fig, ax = plt.subplots(figsize=(8, 6), facecolor="none")
+fig, ax = plt.subplots(figsize=(8, 6))
 
 # Plot stacked histograms for SOM and Non-SOM
 n, bins, patches = ax.hist(
@@ -68,7 +68,7 @@ for patch in patches:
 
 
 # Set x-axis ticks from 68 to 106 with a step of 4
-ax.set_xticks(range(0, 36, 4))
+ax.set_xticks(range(0, 38, 4))
 
 # Set labels and legend
 ax.set_xlabel("SASA (angstrom²)", fontsize=18, fontweight="bold")
@@ -77,8 +77,8 @@ ax.set_ylabel("Number of Sites", fontsize=18, fontweight="bold")
 
 # Add a vertical dash line at x=10
 ax.axvline(x=10, color="black", linestyle="--", linewidth=3)
-ax.set_xlim(2, 36)
-ax.set_ylim(0, 18)
+ax.set_xlim(2, 38)
+ax.set_ylim(0, 25)
 
 # Remove the left and top spines
 ax.spines["right"].set_visible(False)
@@ -92,7 +92,7 @@ plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
 
 plt.tight_layout()
-plt.savefig("./sasa_hydrogen_distribution_all.png", transparent=True)
+plt.savefig("./sasa_hydrogen_distribution_all.png", transparent=False)
 plt.close()
 
 # Determine the last bin range
@@ -111,3 +111,34 @@ print(last_bin_entries["atomic_index"])
 
 print(last_bin_entries["bde"])
 print(last_bin_entries["sasa_hydrogen_maestro"])
+
+
+df_high_sasa_maestro_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "sasa_hydrogen_maestro",
+        "som_level",
+    ]
+)
+for i in range(5, 18):
+    df_high_sasa_maestro_som = pd.concat(
+        [
+            df_high_sasa_maestro_som,
+            som_df[som_df["sasa_hydrogen_maestro"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "sasa_hydrogen_maestro",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+df_high_sasa_maestro_som.to_csv(
+    "../../data/bins/sasa_som/high_sasa_maestro_som.csv", index=False
+)

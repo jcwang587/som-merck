@@ -3,7 +3,7 @@ import pandas as pd
 
 
 # Load the dataset
-dataset = pd.read_csv("../../data/dataset/dataset_merck_bde.csv")
+dataset = pd.read_csv("../../data/dataset/dataset_merck_all.csv")
 
 dataset = dataset[dataset["bde"].notna()]
 som_df = dataset[dataset["primary_som"] == 1]
@@ -13,9 +13,9 @@ non_som_df = dataset[dataset["primary_som"] == 0]
 print(f"number of SOM sites: {len(som_df)}")
 print(f"number of non SOM sites: {len(non_som_df)}")
 
-bde_min = 64
-bde_max = 108
-bins = [bde_min + i * (bde_max - bde_min) / 22 for i in range(23)]
+bde_min = 70
+bde_max = 115
+bins = [bde_min + i * (bde_max - bde_min) / 15 for i in range(16)]
 
 som_bde = (
     pd.cut(som_df["bde"], bins=bins, include_lowest=True).value_counts().sort_index()
@@ -45,6 +45,9 @@ n, bins, patches = ax.hist(
 for patch in patches[:-7]:
     patch.set_facecolor("#00E47C")
 
+patches[-1].set_facecolor("black")
+patches[-3].set_facecolor("grey")
+
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
@@ -63,7 +66,7 @@ for patch in patches:
         )
 
 # Set x-axis ticks from 68 to 106 with a step of 4
-ax.set_xticks(range(70, 106, 4))
+ax.set_xticks(range(70, 115, 6))
 
 # rotate the x-axis labels
 ax.set_xlabel("BDE (kcal/mol)", fontsize=18, fontweight="bold")
@@ -72,8 +75,10 @@ ax.set_ylabel("Number of Sites", fontsize=18, fontweight="bold")
 
 # Add a vertical dash line at x=94
 ax.axvline(x=94, color="black", linestyle="--", linewidth=3)
-ax.set_xlim(68, 106)
-ax.set_ylim(0, 18)
+# ax.axvline(x=106, color="black", linestyle="--", linewidth=3)
+# ax.axvline(x=112, color="black", linestyle="--", linewidth=3)
+ax.set_xlim(67, 118)
+ax.set_ylim(0, 25)
 
 
 # Remove the top and right spines
@@ -92,7 +97,7 @@ plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
 
 plt.tight_layout()
-plt.savefig("./bde_distribution_som.png")
+plt.savefig("./bde_distribution_som.png", transparent=False)
 plt.close()
 
 # Determine the last bin range
@@ -109,3 +114,32 @@ print(last_bin_entries["atomic_index"])
 
 print(last_bin_entries["bde"])
 print(last_bin_entries["sasa_hydrogen_maestro"])
+
+
+df_low_bde_som = pd.DataFrame(
+    columns=[
+        "zaretzki_index",
+        "atomic_index",
+        "zaretzki_atomic_index",
+        "bde",
+        "som_level",
+    ]
+)
+for i in range(0, 8):
+    df_low_bde_som = pd.concat(
+        [
+            df_low_bde_som,
+            som_df[som_df["bde"].between(bins[i], bins[i + 1])][
+                [
+                    "zaretzki_index",
+                    "atomic_index",
+                    "zaretzki_atomic_index",
+                    "bde",
+                    "som_level",
+                ]
+            ],
+        ],
+        ignore_index=True,
+    )
+
+df_low_bde_som.to_csv("../../data/bins/bde_som/low_bde_som.csv", index=False)
