@@ -73,3 +73,16 @@ ax.legend(frameon=False, loc="upper left", bbox_to_anchor=(0.25, 1))
 plt.tight_layout()
 plt.savefig("./relative_ir_distribution_som.png")
 plt.close()
+
+# Print the Zaretzki index of the entries in the 5th bin
+fifth_bin_min = bins[4]
+fifth_bin_max = bins[5]
+print(som_df[(som_df["relative_ir"] >= fifth_bin_min) & (som_df["relative_ir"] < fifth_bin_max)])
+
+ninth_bin_min = bins[8]
+ninth_bin_max = bins[9]
+print(som_df[(som_df["relative_ir"] >= ninth_bin_min) & (som_df["relative_ir"] < ninth_bin_max)])
+
+eleventh_bin_min = bins[10]
+eleventh_bin_max = bins[11]
+print(som_df[(som_df["relative_ir"] >= eleventh_bin_min) & (som_df["relative_ir"] < eleventh_bin_max)])
