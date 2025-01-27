@@ -43,19 +43,19 @@ n, bins, patches = ax.hist(
 
 # Set the last bins to be light green
 for patch in patches[:-7]:
-    patch.set_facecolor('#00E47C')
+    patch.set_facecolor("#00E47C")
 
 # Annotate each bar with the count
 for patch in patches:
     height = patch.get_height()
-    if height > 0: 
+    if height > 0:
         ax.annotate(
             f"{int(height)}",
             xy=(
                 patch.get_x() + patch.get_width() / 2,
                 height + 0.5,
             ),
-            xytext=(0, 0),  
+            xytext=(0, 0),
             textcoords="offset points",
             ha="center",
             va="center",
@@ -76,18 +76,17 @@ ax.set_xlim(68, 106)
 ax.set_ylim(0, 18)
 
 
-
 # Remove the top and right spines
-ax.spines['left'].set_visible(False)
+ax.spines["left"].set_visible(False)
 
 # Move the y-axis to the right
-ax.yaxis.set_ticks_position('right')
-ax.yaxis.set_label_position('right')
+ax.yaxis.set_ticks_position("right")
+ax.yaxis.set_label_position("right")
 
 # Set the axis line width
-ax.spines['bottom'].set_linewidth(1.5)
-ax.spines['top'].set_linewidth(1.5)
-ax.spines['right'].set_linewidth(1.5)
+ax.spines["bottom"].set_linewidth(1.5)
+ax.spines["top"].set_linewidth(1.5)
+ax.spines["right"].set_linewidth(1.5)
 
 plt.xticks(fontsize=16)
 plt.yticks(fontsize=16)
@@ -97,7 +96,7 @@ plt.savefig("./bde_distribution_som.png")
 plt.close()
 
 # Determine the last bin range
-last_bin_range = pd.Interval(bins[-4], bins[-3], closed='right')
+last_bin_range = pd.Interval(bins[-4], bins[-3], closed="right")
 print(last_bin_range)
 
 # Filter the som_df for entries in the last bin
@@ -106,7 +105,7 @@ last_bin_entries = som_df[som_df["bde"].apply(lambda x: x in last_bin_range)]
 # Print the Zaretzki index of the entries in the last bin
 print("Zaretzki index of the last bin:")
 print(last_bin_entries["molecule_title"])
-print(last_bin_entries["atomic_index"])  
+print(last_bin_entries["atomic_index"])
 
 print(last_bin_entries["bde"])
 print(last_bin_entries["sasa_hydrogen_maestro"])
