@@ -146,7 +146,8 @@ class CoxidesAnalysis:
                 missing_sites.append(f"{atom.element}{atom.index}, ")
         
         # Change the last comma to a period
-        missing_sites[-1] = missing_sites[-1].replace(",", ".")
+        if len(missing_sites) > 0:
+            missing_sites[-1] = missing_sites[-1].replace(",", ".")
 
         return missing_sites
 
@@ -267,11 +268,15 @@ class CoxidesAnalysis:
         story.append(main_table)
 
         # Append missing sites
-        if isinstance(self.missing_sites, list):
-            story.append(Paragraph("Missing Sites:", styleHeading3))
+        story.append(Paragraph("Missing Sites:", styleHeading3))
+        
 
-            self.missing_sites = "\n".join(self.missing_sites) 
-            story.append(Paragraph(self.missing_sites, styleNormal))
+        if isinstance(self.missing_sites, list):
+            if len(self.missing_sites) > 0:
+                self.missing_sites = "\n".join(self.missing_sites)
+                story.append(Paragraph(self.missing_sites, styleNormal))
+            else:
+                story.append(Paragraph("None", styleNormal))
 
         # Risk scale
         story.append(Paragraph("Risk Scale:", styleHeading3))
