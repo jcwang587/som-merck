@@ -18,8 +18,10 @@ def combine_bde_sasa(bde_file, sasa_file):
         if atom.index in bde_dict:
             atom.property["r_user_sasa"] = bde_dict[atom.index]
 
+    # Get the name of th
+
     # Export the combined structure
-    structure_bde.write("combined_bde_sasa.mae")
+    structure_bde.write(f"{structure_bde.title}_bde_sasa.mae")
 
 
 bde_file = "./bde_sasa/015_CARBAMAZEPINE.mae"
