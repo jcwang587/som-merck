@@ -3,7 +3,7 @@
 from schrodinger.structure import StructureReader
 
 
-def combine_bde_sasa(bde_file, sasa_file):
+def combine_bde_sasa(bde_file, sasa_file, output_file):
     structure_bde = StructureReader.read(bde_file)
     structure_sasa = StructureReader.read(sasa_file)
 
@@ -18,13 +18,12 @@ def combine_bde_sasa(bde_file, sasa_file):
         if atom.index in bde_dict:
             atom.property["r_user_sasa"] = bde_dict[atom.index]
 
-    # Get the name of th
-
     # Export the combined structure
-    structure_bde.write(f"{structure_bde.title}_bde_sasa.mae")
+    structure_bde.write(output_file)
 
 
 bde_file = "./bde_sasa/015_CARBAMAZEPINE.mae"
 sasa_file = "./bde_sasa/structure_015_sasa.mae"
-
-combine_bde_sasa(bde_file, sasa_file)
+structure = StructureReader.read(bde_file)
+output_file = f"./bde_sasa/{structure.title}_bde_sasa.mae"
+combine_bde_sasa(bde_file, sasa_file, output_file)
