@@ -181,7 +181,7 @@ class CoxidesAnalysis:
                 pass
 
         # Check if SASA property is available
-        if "r_user_CH-SASA" in self.structure.atom[1].property:
+        if "r_user_sasa" in self.structure.atom[1].property:
             data = [["Atom", "BDE (kcal/mol)", "Propensity", "SASA (Å²)"]]
             for atom in self.structure.atom:
                 try:
@@ -196,7 +196,7 @@ class CoxidesAnalysis:
                         str(atom.element) + str(atom.index),
                         str(atom.property["r_user_CH-BDE"]),
                         propensity,
-                        str(atom.property["r_user_CH-SASA"]),
+                        f"{atom.property['r_user_sasa']:.2f}",
                     ]
                     data.append(row)
                 except KeyError:
