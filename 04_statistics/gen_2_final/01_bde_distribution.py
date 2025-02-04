@@ -42,9 +42,12 @@ n, bins, patches = ax.hist(
 )
 
 # Set the last bins to be light green
-for patch in patches[:-7]:
+for patch in patches[:-9]:
     patch.set_facecolor("#00E47C")
 
+for patch in patches[-9:-7]:
+    patch.set_facecolor("#478058")
+    
 patches[-1].set_facecolor("black")
 patches[-3].set_facecolor("grey")
 
