@@ -1,5 +1,6 @@
 # Script to combine BDE and SASA data
 
+import os
 from schrodinger.structure import StructureReader
 
 
@@ -22,8 +23,10 @@ def combine_bde_sasa(bde_file, sasa_file, output_file):
     structure_bde.write(output_file)
 
 
+os.makedirs("./test", exist_ok=True)
+
 bde_file = "./bde_sasa/015_CARBAMAZEPINE.mae"
 sasa_file = "./bde_sasa/structure_015_sasa.mae"
 structure = StructureReader.read(bde_file)
-output_file = f"./bde_sasa/{structure.title}_bde_sasa.mae"
+output_file = f"./test/{structure.title}_bde_sasa.mae"
 combine_bde_sasa(bde_file, sasa_file, output_file)
