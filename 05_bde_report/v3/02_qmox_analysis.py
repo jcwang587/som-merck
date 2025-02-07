@@ -318,7 +318,7 @@ if __name__ == "__main__":
     C_HIGH_COFF = 88
     C_MEDIUM_COFF = 94
 
-    mae_dir = Path("./test")
+    mae_dir = Path("./output")
     mae_files = mae_dir.glob("*.mae")
 
     # Generate the risk scale image
